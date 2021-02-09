@@ -19,19 +19,19 @@ const student2: Student = {
     location: 'Francia'
 }
 
-const studentsList = [
+const studentsList:Array<Student> = [
     student1,
     student2
 ]
 
-const table = document.createElement('table')
+const table:HTMLTableElement = document.createElement('table')
 studentsList.forEach((student) => {
-    const row = table.insertRow()
+    const row:HTMLTableRowElement = table.insertRow()
     for (const [k, v] of Object.entries(student)) {
         if (k === 'firstName' || k === 'location') {
-            const cell = row.insertCell()
-            const text = document.createTextNode(v)
-            cell.appendChild(text)
+            const cell:HTMLTableCellElement = row.insertCell();
+            const text:Text = document.createTextNode(v);
+            cell.appendChild(text);
         }
     }
 })
