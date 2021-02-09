@@ -28,27 +28,27 @@ const table:HTMLTableElement = document.createElement('table');
 const thead: HTMLTableSectionElement = document.createElement('thead');
 const tbody: HTMLTableSectionElement = document.createElement('tbody');
 const tr_thead: HTMLTableRowElement = document.createElement('tr');
-const td1_tr_thead: HTMLTableCellElement = document.createElement('td');
-const td2_tr_thead: HTMLTableCellElement = document.createElement('td');
+const th1_tr_thead: HTMLTableCellElement = document.createElement('th');
+const th2_tr_thead: HTMLTableCellElement = document.createElement('th');
 
-td1_tr_thead.innerHTML = 'firstName';
-td2_tr_thead.innerHTML = 'location';
+th1_tr_thead.innerHTML = 'firstName';
+th2_tr_thead.innerHTML = 'location';
 
 table.append(thead);
 table.append(tbody);
 thead.append(tr_thead);
-tr_thead.append(td1_tr_thead);
-tr_thead.append(td2_tr_thead);
+tr_thead.append(th1_tr_thead);
+tr_thead.append(th2_tr_thead);
 
 studentsList.forEach((student) => {
     const row:HTMLTableRowElement = table.insertRow();
     tbody.append(row);
-    for (const [k, v] of Object.entries(student)) {
-        if (k === 'firstName' || k === 'location') {
-            const cell:HTMLTableCellElement = row.insertCell();
-            const text:Text = document.createTextNode(v);
-            cell.appendChild(text);
-        }
-    }
+    const cell:HTMLTableCellElement = row.insertCell();
+    const text:Text = document.createTextNode(student.firstName);
+    cell.appendChild(text);
+
+    const cell2:HTMLTableCellElement = row.insertCell();
+    const text2:Text = document.createTextNode(student.location);
+    cell2.appendChild(text2);
 })
 document.body.appendChild(table)
