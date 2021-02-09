@@ -28,8 +28,8 @@ const table: HTMLTableElement = document.createElement('table');
 const thead: HTMLTableSectionElement = document.createElement('thead');
 const tbody: HTMLTableSectionElement = document.createElement('tbody');
 const trHead: HTMLTableRowElement = document.createElement('tr');
-const th1: HTMLTableCellElement = document.createElement('th');
-const th2: HTMLTableCellElement = document.createElement('th');
+const th1: HTMLTableHeaderCellElement = document.createElement('th');
+const th2: HTMLTableHeaderCellElement = document.createElement('th');
 
 th1.innerHTML = 'firstName';
 th2.innerHTML = 'location';
