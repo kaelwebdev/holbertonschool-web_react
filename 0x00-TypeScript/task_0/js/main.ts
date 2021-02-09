@@ -1,8 +1,8 @@
 interface Student {
-    firstName: string,
-    lastName: string,
-    age: number,
-    location: string
+    firstName: string;
+    lastName: string;
+    age: number;
+    location: string;
 }
 
 const student1: Student = {
@@ -26,11 +26,11 @@ const studentsList = [
 
 const table = document.createElement('table')
 studentsList.forEach((student) => {
-    let row = table.insertRow()
-    for (let [k, v] of Object.entries(student)) {
+    const row = table.insertRow()
+    for (const [k, v] of Object.entries(student)) {
         if (k === 'firstName' || k === 'location') {
-            let cell = row.insertCell()
-            let text = document.createTextNode(v)
+            const cell = row.insertCell()
+            const text = document.createTextNode(v)
             cell.appendChild(text)
         }
     }
