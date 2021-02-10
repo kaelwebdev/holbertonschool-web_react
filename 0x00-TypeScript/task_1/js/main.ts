@@ -13,6 +13,20 @@ interface Directors extends Teacher {
   numberOfReports: number;
 }
 
+/* eslint-disable @typescript-eslint/class-name-casing */
+interface printTeacherFunction {
+  (firstName: string, lastName: string): string;
+}
+
+function printFullName(firstName: string, lastName: string): string {
+  return `${firstName[0]}. ${lastName}`;
+}
+
+export const printTeacher: printTeacherFunction = printFullName;
+
+
+/* eslint-enable @typescript-eslint/class-name-casing */
+
 /*
  const teacher1: Teacher = {
     firstName: 'John',
@@ -23,5 +37,8 @@ interface Directors extends Teacher {
 };
 
 console.log('teacher1', teacher1);
+
+console.log('Teacher: ', printTeacher('Joe', 'Doe'))
+
 */
 
