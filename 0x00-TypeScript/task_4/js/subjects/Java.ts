@@ -1,7 +1,7 @@
 /// <reference path="./Subject.ts" />
 
 namespace Subjects {
-  export interface Teacher {
+  export interface TeacherInterface {
       experienceTeachingJava?: number
   }
   export class Java extends Subject {
