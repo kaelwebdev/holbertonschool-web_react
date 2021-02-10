@@ -9,6 +9,10 @@ interface Teacher {
   /* eslint-enable @typescript-eslint/no-explicit-any */
 }
 
+interface Directors extends Teacher {
+  numberOfReports: number;
+}
+
 /*
  const teacher1: Teacher = {
     firstName: 'John',
