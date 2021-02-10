@@ -29,13 +29,9 @@ export const printTeacher: printTeacherFunction = printFullName;
 
 export interface StudentClassI {
   firstName: string;
-  lastName:  string;
+  lastName: string;
   workOnHomework(): string;
   displayName(): string;
-}
-
-export interface StudentClassConstructorI{
-  new(firstName: string, lastName: string): StudentClassI;
 }
 
 /* eslint-disable @typescript-eslint/no-unused-vars */
