@@ -27,6 +27,37 @@ export const printTeacher: printTeacherFunction = printFullName;
 
 /* eslint-enable @typescript-eslint/class-name-casing */
 
+interface StudentClassI {
+  firstName: string;
+  lastName:  string;
+  workOnHomework(): string;
+  displayName(): string;
+}
+
+export interface StudentClassConstructorI{
+  new(firstName: string, lastName: string): StudentClassI;
+}
+
+/* eslint-disable @typescript-eslint/no-unused-vars */
+export class StudentClass implements StudentClassI{
+  firstName: string
+  lastName: string
+
+  constructor(firstName: string, lastName: string) {
+      this.firstName = firstName
+      this.lastName = lastName
+  }
+
+  workOnHomework(): string {
+    return 'Currently working';
+  }
+
+  displayName(): string {
+    return this.firstName;
+  }
+}
+/* eslint-enable @typescript-eslint/no-unused-vars */
+
 /*
  const teacher1: Teacher = {
     firstName: 'John',
@@ -39,6 +70,10 @@ export const printTeacher: printTeacherFunction = printFullName;
 console.log('teacher1', teacher1);
 
 console.log('Teacher: ', printTeacher('Joe', 'Doe'))
+
+const s1 = new StudentClass('pepito', 'perez');
+
+console.log(s1);
 
 */
 
