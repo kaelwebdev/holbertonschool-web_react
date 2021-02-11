@@ -8,12 +8,10 @@ export interface MinorCredits {
   _minorCreditsBrand: void;
 }
 
-export const sumMajorCredits = (subject1: number, subject2: number): MajorCredits =>
-({
-  credit: subject1 + subject2
-} as MajorCredits);
+export function sumMajorCredits (subject1: MajorCredits, subject2: MajorCredits): MajorCredits {
+  return { credit: subject1.credit + subject2.credit } as MajorCredits
+}
 
-export const sumMinorCredits = (subject1: number, subject2: number): MinorCredits =>
-({
-  credit: subject1 + subject2
-} as MinorCredits);
+export function sumMinorCredits (subject1: MinorCredits, subject2: MinorCredits): MinorCredits {
+  return { credit: subject1.credit + subject2.credit } as MinorCredits
+}
