@@ -1,11 +1,13 @@
+type UUID = string
+
 export interface MajorCredits {
   credits: number;
-  _majorCreditsBrand: void;
+  brand: UUID;
 }
 
 export interface MinorCredits {
   credits: number;
-  _minorCreditsBrand: void;
+  brand: UUID;
 }
 
 export function sumMajorCredits (subject1: MajorCredits, subject2: MajorCredits): MajorCredits {
