@@ -7,8 +7,11 @@ describe('Test - utils.test.js', () => {
     expect(getFullYear()).toBe(currentYear);
   });
 
-  it('getFooterCopy works in both cases', () => {
+  it('getFooterCopy case 1', () => {
     expect(getFooterCopy(true)).toBe("Holberton School");
+  });
+
+  it('getFooterCopy case 2', () => {
     expect(getFooterCopy(false)).toBe("Holberton School main dashboard");
   });
 
