@@ -1,10 +1,9 @@
 
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
-const currentYear = new Date().getFullYear() + '';
 
 describe('Test - utils.test.js', () => {
   it('Year returns current year', () => {
-    expect(getFullYear()).toBe(currentYear);
+    expect(getFullYear()).toBe( new Date().getFullYear());
   });
 
   it('getFooterCopy case 1', () => {
