@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/holbertonschool-web_react/static/css/main.1952fc8e.chunk.css",
+    "main.js": "/holbertonschool-web_react/static/js/main.aa3da8bd.chunk.js",
+    "main.js.map": "/holbertonschool-web_react/static/js/main.aa3da8bd.chunk.js.map",
+    "runtime-main.js": "/holbertonschool-web_react/static/js/runtime-main.c2a27482.js",
+    "runtime-main.js.map": "/holbertonschool-web_react/static/js/runtime-main.c2a27482.js.map",
+    "static/js/2.a98a9541.chunk.js": "/holbertonschool-web_react/static/js/2.a98a9541.chunk.js",
+    "static/js/2.a98a9541.chunk.js.map": "/holbertonschool-web_react/static/js/2.a98a9541.chunk.js.map",
+    "static/js/3.4b3a1118.chunk.js": "/holbertonschool-web_react/static/js/3.4b3a1118.chunk.js",
+    "static/js/3.4b3a1118.chunk.js.map": "/holbertonschool-web_react/static/js/3.4b3a1118.chunk.js.map",
+    "index.html": "/holbertonschool-web_react/index.html",
+    "static/css/main.1952fc8e.chunk.css.map": "/holbertonschool-web_react/static/css/main.1952fc8e.chunk.css.map",
+    "static/js/2.a98a9541.chunk.js.LICENSE.txt": "/holbertonschool-web_react/static/js/2.a98a9541.chunk.js.LICENSE.txt",
+    "static/media/holbertonLogo.24bab5d6.jpg": "/holbertonschool-web_react/static/media/holbertonLogo.24bab5d6.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c2a27482.js",
+    "static/js/2.a98a9541.chunk.js",
+    "static/css/main.1952fc8e.chunk.css",
+    "static/js/main.aa3da8bd.chunk.js"
+  ]
+}
