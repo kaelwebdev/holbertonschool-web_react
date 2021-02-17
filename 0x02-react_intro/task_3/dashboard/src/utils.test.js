@@ -1,5 +1,5 @@
 
-const { getFullYear, getFooterCopy, getLatestNotification } = require('./utils');
+import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
 const currentYear = new Date().getFullYear() + '';
 
 describe('Test - utils.test.js', () => {
