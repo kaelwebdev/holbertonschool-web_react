@@ -1,5 +1,5 @@
-
 import { getFullYear, getFooterCopy, getLatestNotification } from './utils';
+
 
 describe('Test - utils.test.js', () => {
   it('Year returns current year', () => {
