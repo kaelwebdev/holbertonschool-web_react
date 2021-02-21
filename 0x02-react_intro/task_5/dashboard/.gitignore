@@ -25,6 +25,6 @@ yarn-error.log*
 # dist files
 /dist/*.jpg
 /dist/*.png
-#/dist/bundle.js
+/dist/bundle.js
 /dist/bundle.js.LICENSE.txt
 /dist/favicon.ico
