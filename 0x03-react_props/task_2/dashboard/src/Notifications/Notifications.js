@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './Notifications.css';
 import imgClose from '../assets/close-icon.png';
 import { getLatestNotification } from '../utils/utils';
+import NotificationItem from './NotificationItem';
+
 
 export default class Notifications extends Component {
   closeNotifications () {
@@ -29,14 +31,9 @@ export default class Notifications extends Component {
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <li data-priority="default">
-          New course available
-        </li>
-        <li data-priority="urgent">
-          New resume available
-        </li>
-        <li data-priority="urgent"
-            dangerouslySetInnerHTML={{ __html: getLatestNotification()}} />
+        <NotificationItem data-priority="default" value="New course available" />
+        <NotificationItem data-priority="urgent" value="New resume available" />
+        <NotificationItem data-priority="urgent"dangerouslySetInnerHTML={{ __html: getLatestNotification()}} />
       </ul>
     </div>
   }
