@@ -12,10 +12,10 @@
   padding-bottom: 10px;
 }
 
-li[data-priority="default"] {
+li[data-notification-type="default"] {
   color: #1d0563;
 }
 
-li[data-priority="urgent"] {
+li[data-notification-type="urgent"] {
   color: #ff0200;
 }
