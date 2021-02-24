@@ -2,21 +2,30 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import './Notifications.css';
 import imgClose from '../assets/close-icon.png';
-import { getLatestNotification } from '../utils/utils';
 import NotificationItem from './NotificationItem';
-
+import NotificationItemShape from './NotificationItemShape';
 
 export default class Notifications extends Component {
   static propTypes = {
-    displayDrawer: PropTypes.bool
+    displayDrawer: PropTypes.bool,
+    listNotifications: PropTypes.arrayOf(NotificationItemShape)
   }
 
   static defaultProps  = {
-    displayDrawer: false
+    displayDrawer: false,
+    listNotifications: []
   }
   
   closeNotifications () {
     console.log("Close button has been clicked");
+  }
+  generateRows = () => {
+    if (this.props.listNotifications.length <= 0) {
+      return (<li>No new notification for now</li>);
+    }
+    return this.props.listNotifications.map((x) =>
+      <NotificationItem key={x.id} type={x.type} value={x.value} html={x.html} />
+    );
   }
   
   render() {
@@ -44,9 +53,7 @@ export default class Notifications extends Component {
       </button>
       <p>Here is the list of notifications</p>
       <ul>
-        <NotificationItem type="default" value="New course available" />
-        <NotificationItem type="urgent" value="New resume available" />
-        <NotificationItem type="urgent"html={{ __html: getLatestNotification()}} />
+        { this.generateRows() }
       </ul>
     </div> : null }
     </>
