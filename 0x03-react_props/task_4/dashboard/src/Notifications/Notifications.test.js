@@ -8,9 +8,11 @@ describe("Notifications.test.js", () => {
     shallow(<Notifications />);
   });
   it('correct number of items in the list', () => {
+    const wrapper = shallow(<Notifications displayDrawer={ true }/>);
     expect(wrapper.find('ul').children().length).toEqual(3);
   });
   it('correct list title', () => {
+    const wrapper = shallow(<Notifications displayDrawer={ true }/>);
     expect(
       wrapper.containsMatchingElement(<p>Here is the list of notifications</p>)
     ).toBeTruthy();

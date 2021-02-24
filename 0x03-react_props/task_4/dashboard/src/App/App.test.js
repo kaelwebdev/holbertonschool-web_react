@@ -37,7 +37,6 @@ describe("App.test.js", () => {
   });
   it('CourseList exist when isLoggedIn = false', () => {
     const wrapper = shallow(<App isLoggedIn={ false } />);
-    console.log(wrapper.html());
     expect(wrapper.find(Login).exists()).toEqual(true);
   });
 });

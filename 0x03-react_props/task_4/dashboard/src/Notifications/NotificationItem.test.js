@@ -22,9 +22,9 @@ describe("NotificationItem.test.js", () => {
 
   it('correct component rendering - case2 - html', () => {
     const html = '<u>test</u>';
-    const wrapper = shallow(<NotificationItem value="aa" html={{ __html: '<u>test</u>' }}/>);
+    const wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }}/>);
     const li = wrapper.find('li');
     expect(li.exists()).toEqual(true);
-    expect(wrapper.html()).toEqual(`<li>${ html }</li>`);
+    expect(wrapper.html()).toEqual(`<li data-notification-type=\"default\">${ html }</li>`);
   });
 });

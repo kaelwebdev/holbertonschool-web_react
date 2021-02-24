@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './Notifications.css';
 import imgClose from '../assets/close-icon.png';
 import { getLatestNotification } from '../utils/utils';
@@ -6,12 +7,24 @@ import NotificationItem from './NotificationItem';
 
 
 export default class Notifications extends Component {
+  static propTypes = {
+    displayDrawer: PropTypes.bool
+  }
+
+  static defaultProps  = {
+    displayDrawer: false
+  }
+  
   closeNotifications () {
     console.log("Close button has been clicked");
   }
-
+  
   render() {
-    return <div className="Notifications">
+    return <>
+    <div className="menuItem">
+        <p>Your notifications</p>
+    </div>
+    { this.props.displayDrawer ? <div className="Notifications">
       <button aria-label="Close"
               onClick={ this.closeNotifications }
               style={
@@ -21,13 +34,13 @@ export default class Notifications extends Component {
                 visibility: "hidden"}
               }
       >
-        <img alt="close" src={imgClose}
-              style={
-                {visibility: "visible",
-                height: "15px",
-                width: "15px"}
-              }
-        />
+      <img alt="close" src={imgClose}
+            style={
+              {visibility: "visible",
+              height: "15px",
+              width: "15px"}
+            }
+      />
       </button>
       <p>Here is the list of notifications</p>
       <ul>
@@ -35,6 +48,8 @@ export default class Notifications extends Component {
         <NotificationItem type="urgent" value="New resume available" />
         <NotificationItem type="urgent"html={{ __html: getLatestNotification()}} />
       </ul>
-    </div>
+    </div> : null }
+    </>
   }
 }
+
