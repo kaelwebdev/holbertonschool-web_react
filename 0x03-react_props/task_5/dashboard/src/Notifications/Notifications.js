@@ -19,7 +19,7 @@ export default class Notifications extends Component {
   closeNotifications () {
     console.log("Close button has been clicked");
   }
-  generateRows = () => {
+  generateList = () => {
     if (this.props.listNotifications.length <= 0) {
       return (<li>No new notification for now</li>);
     }
@@ -51,9 +51,9 @@ export default class Notifications extends Component {
             }
       />
       </button>
-      <p>Here is the list of notifications</p>
+      { this.props.listNotifications?.length > 0  ? <p>Here is the list of notifications</p> : null}
       <ul>
-        { this.generateRows() }
+        { this.generateList() }
       </ul>
     </div> : null }
     </>

@@ -15,7 +15,6 @@ export default class CourseList extends Component {
   }
 
   generateRows = () => {
-    console.log(this.props)
     if (this.props.listCourses.length <= 0) {
       return (<tr><td>No course available yet</td></tr>);
     }
