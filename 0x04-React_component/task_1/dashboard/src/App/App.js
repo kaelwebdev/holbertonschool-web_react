@@ -23,11 +23,34 @@ const listNotifications = [
 
 export default class App extends Component {
   static propTypes = {
-    isLoggedIn: PropTypes.bool
+    isLoggedIn: PropTypes.bool,
+    logOut: PropTypes.func
   }
 
   static defaultProps  = {
-    isLoggedIn: false
+    isLoggedIn: false,
+    logOut: () => null
+  }
+
+  constructor(props) {
+    super(props)
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("keydown", this.handleLogout);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("keydown", this.handleLogout);
+  }
+
+  handleLogout (event) {
+    if (event.ctrlKey && event.key === 'h') {
+        event.preventDefault();
+        alert("Logging you out");
+        this.props.logOut();
+    }
   }
 
   render() {
