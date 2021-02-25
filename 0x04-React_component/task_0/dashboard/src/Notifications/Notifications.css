@@ -4,7 +4,7 @@
   border-style: dashed;
   margin-bottom: 20px;
   position: absolute;
-  top: 5;
+  top: 37px;
   right: 0;
   text-align: left;
   margin-right: 10px;
@@ -13,9 +13,10 @@
 
 .menuItem {
   top: 0;
-  right: 50px;
+  right: 0px;
   text-align: right;
   margin: 10px;
+  position: absolute;
 }
 
 #root-notifications {
