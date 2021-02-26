@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import App from './App';
 import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
@@ -38,5 +38,15 @@ describe("App.test.js", () => {
   it('CourseList exist when isLoggedIn = false', () => {
     const wrapper = shallow(<App isLoggedIn={ false } />);
     expect(wrapper.find(Login).exists()).toEqual(true);
+  });
+});
+
+describe("App.test.js - events", () => {
+  it('Alert when user keydown ctrl+h', () => {
+    window.alert = jest.fn();
+    const alert = jest.spyOn(window, 'alert');
+    const event = new KeyboardEvent('keydown', {ctrlKey:true, key:'h'});
+    window.dispatchEvent(event);
+    expect(alert).toHaveBeenCalledWith('Logging you out');
   });
 });

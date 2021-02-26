@@ -29,7 +29,7 @@ export default class App extends Component {
 
   static defaultProps  = {
     isLoggedIn: false,
-    logOut: () => null
+    logOut: () => undefined
   }
 
   constructor(props) {
