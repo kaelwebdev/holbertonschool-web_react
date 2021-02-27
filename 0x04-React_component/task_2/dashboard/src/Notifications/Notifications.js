@@ -12,20 +12,33 @@ export default class Notifications extends Component {
   }
 
   static defaultProps  = {
-    displayDrawer: false,
+    displayDrawer: true,
     listNotifications: []
   }
-  
+
+  constructor (props) {
+    super(props);
+    this.logClick = this.closeNotifications.bind(this);
+    this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  markAsRead = id => {
+    console.log(`Notification ${id} has been marked as read`);
+  }
+
   closeNotifications () {
     console.log("Close button has been clicked");
   }
+
+  renderNotification = x =>
+    <NotificationItem key={ x.id } keyId={ x.id } type={ x.type }
+    value={ x.value } html={ x.html } markAsRead={ this.markAsRead }/>
+
   generateList = () => {
     if (this.props.listNotifications.length <= 0) {
       return (<li>No new notification for now</li>);
     }
-    return this.props.listNotifications.map((x) =>
-      <NotificationItem key={x.id} type={x.type} value={x.value} html={x.html} />
-    );
+    return this.props.listNotifications.map(this.renderNotification)
   }
   
   render() {

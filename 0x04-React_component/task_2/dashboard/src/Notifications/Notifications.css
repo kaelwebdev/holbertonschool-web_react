@@ -9,6 +9,7 @@
   text-align: left;
   margin-right: 10px;
   padding: 20px 20px;
+  z-index: 1;
 }
 
 .menuItem {

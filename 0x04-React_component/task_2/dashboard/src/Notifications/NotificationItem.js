@@ -8,11 +8,22 @@ export default class NotificationItem extends Component {
     value: PropTypes.string,
     html: PropTypes.shape({
       __html: PropTypes.string,
-    })
+    }),
+    markAsRead: PropTypes.func
   }
 
   static defaultProps  = {
-    type: 'default'
+    type: 'default',
+    markAsRead: () => undefined
+  }
+
+  constructor (props) {
+    super(props);
+    this.markAsRead = this.markAsRead.bind(this);
+  }
+
+  markAsRead () {
+    this.props.markAsRead(this.props.keyId);
   }
 
   checkhtml() {
@@ -21,11 +32,13 @@ export default class NotificationItem extends Component {
     }
     return ;
   }
+
   render() {
     return (
       <>
         <li data-notification-type={ this.props.type }
             dangerouslySetInnerHTML={ this.props.html }
+            onClick={ this.markAsRead }
         >
           { this.checkhtml() }
         </li>
