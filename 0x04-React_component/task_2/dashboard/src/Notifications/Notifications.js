@@ -12,7 +12,7 @@ export default class Notifications extends Component {
   }
 
   static defaultProps  = {
-    displayDrawer: true,
+    displayDrawer: false,
     listNotifications: []
   }
 
