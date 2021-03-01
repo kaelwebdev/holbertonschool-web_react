@@ -7,7 +7,8 @@ import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import CourseList from '../CourseList/CourseList'
 import { getLatestNotification } from '../utils/utils';
-
+import BodySection from '../BodySection/BodySection';
+import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},
@@ -54,9 +55,17 @@ export default class App extends Component {
   }
 
   render() {
-    let mainArea = <Login />;
+    let mainArea = (
+      <BodySectionWithMarginBottom title='Log in to continue'>
+      <Login />
+      </BodySectionWithMarginBottom>
+    );
     if (this.props.isLoggedIn) {
-      mainArea = <CourseList listCourses={ listCourses } />;
+      mainArea = (
+        <BodySectionWithMarginBottom title='Course list' >
+          <CourseList listCourses={listCourses} />
+        </BodySectionWithMarginBottom>
+       );
     }
 
     return (
@@ -68,6 +77,17 @@ export default class App extends Component {
           </div>
           <div className="App-body">
             { mainArea }
+            <BodySection title='News from the School'>
+              <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+              sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+              Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt
+              mollit anim id est laborum.
+              </p>
+            </BodySection>
           </div>
           <div className="App-footer">
             <Footer/>
