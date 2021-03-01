@@ -89,4 +89,45 @@ describe("Notifications.test.js", () => {
     markAsReadSpy.mockRestore();
     consoleSpy.mockRestore();
   });
+
+  describe("pure component", () => {
+    it('disallow render component', () => {
+      const ns = [
+        {id: 1, html: undefined, type: "default", value: "New course available"}
+      ];
+
+      const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
+      
+      const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
+      const logSpy = jest.spyOn(console, 'log');
+
+      wrapper.setProps({ listNotifications:ns });
+      expect(shouldComponentUpdate).toHaveBeenCalled();
+      expect(logSpy).toHaveBeenCalledWith('this is a message for one of the tests - false');
+
+      jest.restoreAllMocks();
+
+    });
+
+    it('allow render component', () => {
+      const ns = [
+        {id: 1, html: undefined, type: "default", value: "New course available"},
+      ];
+      const ns2 = [
+        {id: 1, html: undefined, type: "default", value: "New course available"},
+        {id: 2, html: undefined, type: "urgent", value: "New resume available"}
+      ];
+
+      const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
+      
+      const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
+      const logSpy = jest.spyOn(console, 'log');
+
+      wrapper.setProps({ listNotifications:ns2 });
+      expect(shouldComponentUpdate).toHaveBeenCalled();
+      expect(logSpy).toHaveBeenCalledWith('this is a message for one of the tests - true');
+
+      jest.restoreAllMocks();
+    });
+  });
 });

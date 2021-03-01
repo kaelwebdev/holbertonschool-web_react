@@ -24,8 +24,10 @@ export default class Notifications extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.listNotifications.length > this.props.listNotifications.length ){
-        return true;
+      console.log('this is a message for one of the tests - true');
+      return true;
     }
+    console.log('this is a message for one of the tests - false');
     return false;
   }
 
