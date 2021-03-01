@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types';
 
 
-export default class NotificationItem extends Component {
+export default class NotificationItem extends PureComponent {
   static propTypes = {
     type: PropTypes.string.isRequired,
     value: PropTypes.string,
