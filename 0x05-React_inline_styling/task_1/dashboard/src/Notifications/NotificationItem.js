@@ -15,7 +15,7 @@ export default class NotificationItem extends PureComponent {
 
   static defaultProps  = {
     type: 'default',
-    markAsRead: () => undefined
+    markAsRead: () => void(0)
   }
 
   constructor (props) {

@@ -22,32 +22,6 @@ const listNotifications = [
   {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
 ];
 
-const styles = StyleSheet.create({
-  app: {
-    position: "relative",
-    minHeight: "100vh",
-    width: "100%",
-  },
-  header: {
-    display: 'flex',
-    alignItems: 'center',
-    color: '#E0354B',
-    borderBottom: '4px solid #E0354B'
-  },
-  body: {
-    padding: '50px 50px 115px 50px'
-  },
-  footer: {
-    position: 'absolute',
-    right: 0,
-    bottom: 0,
-    left: 0,
-    padding: '20px',
-    backgroundColor: 'white',
-    borderTop: '4px solid #E0354B'
-  }
-});
-
 export default class App extends Component {
   static propTypes = {
     isLoggedIn: PropTypes.bool,
@@ -56,7 +30,7 @@ export default class App extends Component {
 
   static defaultProps  = {
     isLoggedIn: false,
-    logOut: () => undefined
+    logOut: () => void(0)
   }
 
   constructor(props) {
@@ -124,3 +98,28 @@ export default class App extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  app: {
+    position: "relative",
+    minHeight: "100vh",
+    width: "100%",
+  },
+  header: {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#E0354B',
+    borderBottom: '4px solid #E0354B'
+  },
+  body: {
+    padding: '50px 50px 115px 50px'
+  },
+  footer: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
+    padding: '20px',
+    backgroundColor: 'white',
+    borderTop: '4px solid #E0354B'
+  }
+});
