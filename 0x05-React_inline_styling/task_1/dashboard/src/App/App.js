@@ -28,16 +28,16 @@ const styles = StyleSheet.create({
     minHeight: "100vh",
     width: "100%",
   },
-  appHeader: {
+  header: {
     display: 'flex',
     alignItems: 'center',
     color: '#E0354B',
     borderBottom: '4px solid #E0354B'
   },
-  appBody: {
+  body: {
     padding: '50px 50px 115px 50px'
   },
-  appFooter: {
+  footer: {
     position: 'absolute',
     right: 0,
     bottom: 0,
@@ -98,10 +98,10 @@ export default class App extends Component {
       <>
         <Notifications listNotifications={ listNotifications }/>
         <div className={css(styles.app, styles.globals)}>
-          <div className={css(styles.appHeader)}>
+          <div className={css(styles.header)}>
             <Header/>
           </div>
-          <div className={css(styles.appBody)}>
+          <div className={css(styles.body)}>
             { mainArea }
             <BodySection title='News from the School'>
               <p>
@@ -115,7 +115,7 @@ export default class App extends Component {
               </p>
             </BodySection>
           </div>
-          <div className={css(styles.appFooter)}>
+          <div className={css(styles.footer)}>
             <Footer/>
           </div>
         </div>
