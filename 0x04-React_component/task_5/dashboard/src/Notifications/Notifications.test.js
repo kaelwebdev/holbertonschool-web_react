@@ -99,11 +99,10 @@ describe("Notifications.test.js", () => {
       const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
       
       const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
-      const logSpy = jest.spyOn(console, 'log');
 
       wrapper.setProps({ listNotifications:ns });
       expect(shouldComponentUpdate).toHaveBeenCalled();
-      expect(logSpy).toHaveBeenCalledWith('this is a message for one of the tests - false');
+      expect(shouldComponentUpdate).toHaveLastReturnedWith(false);
 
       jest.restoreAllMocks();
 
@@ -121,11 +120,10 @@ describe("Notifications.test.js", () => {
       const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
       
       const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
-      const logSpy = jest.spyOn(console, 'log');
 
       wrapper.setProps({ listNotifications:ns2 });
       expect(shouldComponentUpdate).toHaveBeenCalled();
-      expect(logSpy).toHaveBeenCalledWith('this is a message for one of the tests - true');
+      expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
 
       jest.restoreAllMocks();
     });
