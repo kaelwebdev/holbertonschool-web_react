@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './App.css';
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -9,6 +8,7 @@ import CourseList from '../CourseList/CourseList'
 import { getLatestNotification } from '../utils/utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
+import {StyleSheet, css} from 'aphrodite';
 
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},
@@ -21,6 +21,32 @@ const listNotifications = [
   {id: 2, html: undefined, type: "urgent", value: "New resume available"},
   {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
 ];
+
+const styles = StyleSheet.create({
+  app: {
+    position: "relative",
+    minHeight: "100vh",
+    width: "100%",
+  },
+  appHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    color: '#E0354B',
+    borderBottom: '4px solid #E0354B'
+  },
+  appBody: {
+    padding: '50px 50px 115px 50px'
+  },
+  appFooter: {
+    position: 'absolute',
+    right: 0,
+    bottom: 0,
+    left: 0,
+    padding: '20px',
+    backgroundColor: 'white',
+    borderTop: '4px solid #E0354B'
+  }
+});
 
 export default class App extends Component {
   static propTypes = {
@@ -71,11 +97,11 @@ export default class App extends Component {
     return (
       <>
         <Notifications listNotifications={ listNotifications }/>
-        <div className="App">
-          <div className="App-header">
+        <div className={css(styles.app, styles.globals)}>
+          <div className={css(styles.appHeader)}>
             <Header/>
           </div>
-          <div className="App-body">
+          <div className={css(styles.appBody)}>
             { mainArea }
             <BodySection title='News from the School'>
               <p>
@@ -89,7 +115,7 @@ export default class App extends Component {
               </p>
             </BodySection>
           </div>
-          <div className="App-footer">
+          <div className={css(styles.appFooter)}>
             <Footer/>
           </div>
         </div>
