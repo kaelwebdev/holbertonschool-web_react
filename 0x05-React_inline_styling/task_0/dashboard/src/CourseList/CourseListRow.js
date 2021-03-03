@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const rowStyle = {
+  backgroundColor : '#f5f5f5ab'
+};
+
+const headerRowStyle = {
+  backgroundColor : '#deb5b545'
+};
 
 class CourseListRow extends Component {
   render() {
     if (this.props.isHeader) {
       if (this.props.textSecondCell === null) {
         return (
-          <tr>
+          <tr style={ headerRowStyle }>
             <th colSpan="2">
               { this.props.textFirstCell}
             </th>
@@ -15,7 +22,7 @@ class CourseListRow extends Component {
         );
       }
       return (
-        <tr>
+        <tr style={ headerRowStyle }>
           <th>
             { this.props.textFirstCell }
           </th>
@@ -26,7 +33,7 @@ class CourseListRow extends Component {
       );
     }
     return (
-      <tr>
+      <tr style={rowStyle}>
         <td>
           { this.props.textFirstCell }
         </td>
