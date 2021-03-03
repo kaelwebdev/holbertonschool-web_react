@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import CourseListRow from './CourseListRow';
-import './CourseList.css'
 import CourseShape from './CourseShape';
+import {StyleSheet, css} from 'aphrodite';
 
 
 export default class CourseList extends Component {
@@ -25,7 +25,7 @@ export default class CourseList extends Component {
 
   render() {
     return (
-      <table id="CourseList">
+      <table id="CourseList" className={ css(styles.table) }>
         <thead>
           <CourseListRow isHeader={true} textFirstCell="Available courses" />
           <CourseListRow isHeader={true} textFirstCell="Course name" textSecondCell="Credit" />
@@ -37,3 +37,30 @@ export default class CourseList extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  table: {
+    textAlign: 'left',
+    margin: '10px',
+    border: '1px solid lightgrey',
+    width: '100%'
+  }
+});
+/*
+th, td {
+    padding: '5px'
+  }
+  
+  td {
+    fontWeight: 'normal'
+  }
+  
+  th {
+    fontWeight: 'bold',
+    borderBottom: '3px solid lightgrey'
+  }
+  
+  tr :onlyChild {
+    textAlign: 'center'
+  }, 
+*/
