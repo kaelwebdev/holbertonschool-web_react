@@ -97,7 +97,7 @@ export default class App extends Component {
     return (
       <>
         <Notifications listNotifications={ listNotifications }/>
-        <div className={css(styles.app, styles.globals)}>
+        <div className={css(styles.app)}>
           <div className={css(styles.header)}>
             <Header/>
           </div>
