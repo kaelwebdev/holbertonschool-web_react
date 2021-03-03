@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import logo from '../assets/holberton-logo.jpg';
-// import './Header.css';
 import {StyleSheet, css} from 'aphrodite';
 
 
