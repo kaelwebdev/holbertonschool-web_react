@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './Notifications.css';
 import imgClose from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 import NotificationItemShape from './NotificationItemShape';
+import {StyleSheet, css} from 'aphrodite';
+
 
 export default class Notifications extends Component {
   static propTypes = {
@@ -50,10 +51,10 @@ export default class Notifications extends Component {
   
   render() {
     return <>
-    <div className="menuItem">
-        <p>Your notifications</p>
+    <div className={ css(styles.menuItem) }>
+        <p className={ css(styles.p) }>Your notifications</p>
     </div>
-    { this.props.displayDrawer ? <div className="Notifications">
+    { this.props.displayDrawer ? <div className={ css(styles.notifications) }>
       <button aria-label="Close"
               onClick={ this.closeNotifications }
               style={
@@ -80,3 +81,28 @@ export default class Notifications extends Component {
   }
 }
 
+const styles = StyleSheet.create({
+  notifications: {
+    padding: '30px 5px',
+    border: '1px solid #E0354B',
+    borderStyle: 'dashed',
+    marginBottom: '20px',
+    position: 'absolute',
+    top: '37px',
+    right: 0,
+    textAlign: 'left',
+    marginRight: '10px',
+    padding: '20px 20px',
+    zIndex: 1
+  },
+  menuItem: {
+    top: 0,
+    right: '0px',
+    textAlign: 'right',
+    margin: '10px',
+    position: 'absolute',
+  },
+  p: {
+      paddingBottom: '10px'
+  }
+});
