@@ -1,13 +1,22 @@
 import React, { Component } from 'react'
 import { getFullYear, getFooterCopy } from '../utils/utils';
 import './Footer.css';
+import {StyleSheet, css} from 'aphrodite';
+
 
 export default class Footer extends Component {
   render() {
     return (
       <>
-        <p>Copyright {getFullYear()} - {getFooterCopy()}</p>
+        <p className={ css(styles.p) }>Copyright {getFullYear()} - {getFooterCopy()}</p>
       </>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  p: {
+    textAlign: 'center',
+    fontStyle: 'italic'
+  }
+});
