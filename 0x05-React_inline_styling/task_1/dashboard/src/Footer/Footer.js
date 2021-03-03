@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { getFullYear, getFooterCopy } from '../utils/utils';
-import './Footer.css';
 import {StyleSheet, css} from 'aphrodite';
 
 
