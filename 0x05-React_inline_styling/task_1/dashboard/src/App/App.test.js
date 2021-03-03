@@ -3,30 +3,27 @@ import { shallow, mount } from 'enzyme';
 import App from './App';
 import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe("App.test.js", () => {
   let wrapper;
 
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   afterEach(() => {
     wrapper.unmount();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
   it('Correct component rendering', () => {
     wrapper = shallow(<App />);
   });
 
-  it('renders App-header', () => {
-    wrapper = shallow(<App />);
-    expect(wrapper.find('div.App-header').exists()).toEqual(true);
-  });
-  it('renders App-body', () => {
-    wrapper = shallow(<App />);
-    expect(wrapper.find('div.App-body').exists()).toEqual(true);
-  });
-  it('renders App-footer', () => {
-    wrapper = shallow(<App />);
-    expect(wrapper.find('div.App-footer').exists()).toEqual(true);
-  });
   it('renders Header', () => {
     wrapper = shallow(<App />);
     expect(wrapper.find('Header').exists()).toEqual(true);
@@ -56,9 +53,18 @@ describe("App.test.js", () => {
 describe("App.test.js - events", () => {
   let wrapper;
 
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   afterEach(() => {
     wrapper.unmount();
   });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
 
   it('Alert when user keydown ctrl+h', () => {
     wrapper = shallow(<App />);

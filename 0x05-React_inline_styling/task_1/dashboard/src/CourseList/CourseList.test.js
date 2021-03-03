@@ -2,6 +2,8 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import CourseList from '../CourseList/CourseList';
 import CourseListRow from './CourseListRow';
+import { StyleSheetTestUtils } from "aphrodite";
+
 
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},
@@ -10,6 +12,14 @@ const listCourses = [
 ];
 
 describe("CourseList.test.js", () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('Correct component rendering', () => {
     const wrapper = shallow(<CourseList />);
     expect(wrapper.exists()).toEqual(true);

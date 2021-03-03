@@ -46,21 +46,3 @@ const styles = StyleSheet.create({
     width: '100%'
   }
 });
-/*
-th, td {
-    padding: '5px'
-  }
-  
-  td {
-    fontWeight: 'normal'
-  }
-  
-  th {
-    fontWeight: 'bold',
-    borderBottom: '3px solid lightgrey'
-  }
-  
-  tr :onlyChild {
-    textAlign: 'center'
-  }, 
-*/

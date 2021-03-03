@@ -2,12 +2,22 @@ import React from 'react';
 import NotificationItem from './NotificationItem';
 import { shallow, mount  } from 'enzyme';
 import Notifications from './Notifications'
+import { StyleSheetTestUtils } from "aphrodite";
+
 
 describe("NotificationItem.test.js", () => {
   let wrapper;
 
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   afterEach(() => {
     wrapper.unmount();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
   it('correct component rendering', () => {
@@ -31,16 +41,25 @@ describe("NotificationItem.test.js", () => {
     wrapper = shallow(<NotificationItem html={{ __html: '<u>test</u>' }}/>);
     const li = wrapper.find('li');
     expect(li.exists()).toEqual(true);
-    expect(wrapper.html()).toEqual(`<li data-notification-type=\"default\">${ html }</li>`);
+    expect(li.html()).toContain(`${ html }`);
   });
 });
 
 describe("NotificationItem.test.js - events", () => {
   let wrapper;
 
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   afterEach(() => {
     wrapper.unmount();
   });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
 
   it('function markAsRead - correct log message -case 1', () => {
 

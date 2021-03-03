@@ -2,12 +2,22 @@ import React from 'react';
 import { mount } from 'enzyme';
 import BodySectionWithMarginBottom from './BodySectionWithMarginBottom';
 import BodySection from './BodySection';
+import { StyleSheetTestUtils } from "aphrodite";
+
 
 describe("BodySectionWithMarginBottom.test.js", () => {
   let wrapper;
 
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
   afterEach(() => {
     wrapper.unmount();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
   it('Correct component rendering', () => {

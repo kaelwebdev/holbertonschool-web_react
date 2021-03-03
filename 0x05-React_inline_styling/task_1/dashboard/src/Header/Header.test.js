@@ -1,10 +1,20 @@
 import React from 'react';
 import Header from './Header';
 import { shallow } from 'enzyme';
+import { StyleSheetTestUtils } from "aphrodite";
+
 
 const wrapper = shallow(<Header/>);
 
 describe("Header.test.js", () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('correct component rendering', () => {
     shallow(<Header />);
   });

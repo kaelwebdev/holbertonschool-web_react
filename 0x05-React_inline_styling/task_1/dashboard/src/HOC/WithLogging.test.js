@@ -1,10 +1,18 @@
 import React from 'react';
 import { mount } from 'enzyme';
-
 import WithLogging from './WithLogging';
 import Login from '../Login/Login';
+import { StyleSheetTestUtils } from "aphrodite";
 
 describe('WithLogging', () => {
+  beforeAll(() => {
+    StyleSheetTestUtils.suppressStyleInjection();
+  });
+
+  afterAll(() => {
+    StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
+  });
+
   it('log msg when the component has a name', () => {
     const logSpy = jest.spyOn(console, 'log');
 
