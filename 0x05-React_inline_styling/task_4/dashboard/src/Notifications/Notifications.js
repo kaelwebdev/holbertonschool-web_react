@@ -52,7 +52,7 @@ export default class Notifications extends Component {
   render() {
     return <>
     <div className={ css(styles.menuItem) }>
-        <p className={ css(styles.p) }>Your notifications</p>
+        <p className={ css(styles.p, styles.bounce, styles.textFlash) }>Your notifications</p>
     </div>
     { this.props.displayDrawer ? <div className={ css(styles.notifications) }>
       <button aria-label="Close"
@@ -82,6 +82,38 @@ export default class Notifications extends Component {
 }
 
 const styles = StyleSheet.create({
+  textFlash: {  
+    ':hover': {
+    animationName: {
+        '50%': {
+            opacity: '50%'
+        },
+        '100%': {
+            opacity: '100%'
+        },
+    },
+    animationDuration: '1s',
+    animationIterationCount: '2',
+    },
+  },
+  bounce: {
+      ':hover': {
+      cursor: 'pointer',
+      animationName: {
+          '25%': {
+              transform: 'translateY(-5px)'
+          },
+          '75%': {
+              transform: 'translateY(5px)'
+          },
+          '100%': {
+              transform: 'translateY(0px)'
+          },
+      },
+      animationDuration: '0.5s',
+      animationIterationCount: '3',
+      }
+  },
   notifications: {
     padding: '30px 5px',
     border: '1px solid #E0354B',
@@ -110,7 +142,8 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     margin: '10px',
     position: 'absolute',
-    zIndex: 1
+    zIndex: 1,
+    backgroundColor: '#fff8f8'
   },
   p: {
       paddingBottom: '10px'
