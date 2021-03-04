@@ -93,7 +93,16 @@ const styles = StyleSheet.create({
     textAlign: 'left',
     marginRight: '10px',
     padding: '20px 20px',
-    zIndex: 1
+    zIndex: 1,
+    backgroundColor: 'white',
+    '@media (max-width: 900px)': {
+      top:0,
+      left: 0,
+      margin: '0px',
+      width: '100%',
+      height: '100%',
+      fontSize: '20px'
+    }
   },
   menuItem: {
     top: 0,
@@ -101,6 +110,7 @@ const styles = StyleSheet.create({
     textAlign: 'right',
     margin: '10px',
     position: 'absolute',
+    zIndex: 1
   },
   p: {
       paddingBottom: '10px'

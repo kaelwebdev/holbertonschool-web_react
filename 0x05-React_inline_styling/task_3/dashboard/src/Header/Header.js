@@ -18,6 +18,11 @@ const styles = StyleSheet.create({
   header: {
     display: 'flex',
     alignItems: 'center',
+    '@media only screen and (max-width: 400px)': {
+      display: 'flex',
+      flexDirection: 'column',
+      margin: 'auto'
+    }
   },
   img: {
     width: '14rem'

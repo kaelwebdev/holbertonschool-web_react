@@ -35,9 +35,9 @@ export default class NotificationItem extends PureComponent {
   }
 
   render() {
-    let style = css(styles.defaultPriority);
+    let style = css(styles.defaultPriority, styles.only900);
     if (this.props.type === "urgent") {
-      style = css(styles.urgentPriority);
+      style = css(styles.urgentPriority, styles.only900);
     }
     return (
       <>
@@ -53,6 +53,13 @@ export default class NotificationItem extends PureComponent {
 }
 
 const styles = StyleSheet.create({
+  only900: {
+    '@media only screen and (max-width: 900px)': {
+        borderBottom: '1px solid black',
+        padding: '10px 8px',
+        fontSize: '20px'
+    }
+  },
   defaultPriority: {
         color: "#1d0563"
   },
