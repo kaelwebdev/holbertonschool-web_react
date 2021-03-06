@@ -9,12 +9,16 @@ import {StyleSheet, css} from 'aphrodite';
 export default class Notifications extends Component {
   static propTypes = {
     displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape)
+    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    handleDisplayDrawer: PropTypes.func,
+    handleHideDrawer: PropTypes.func,
   }
 
   static defaultProps  = {
     displayDrawer: false,
-    listNotifications: []
+    listNotifications: [],
+    handleDisplayDrawer: () => void(0),
+    handleHideDrawer: () => void(0),
   }
 
   constructor (props) {
@@ -25,6 +29,12 @@ export default class Notifications extends Component {
 
   shouldComponentUpdate(nextProps) {
     if (nextProps.listNotifications.length > this.props.listNotifications.length ){
+      return true;
+    }
+    if (this.props.displayDrawer !== nextProps.displayDrawer) {
+      console.log(this.props.displayDrawer);
+      console.log(nextProps.displayDrawer);
+      this.displayDrawer = this.props.displayDrawer;
       return true;
     }
     return false;
@@ -52,11 +62,15 @@ export default class Notifications extends Component {
   render() {
     return <>
     <div className={ css(styles.menuItem) }>
-        <p className={ css(styles.p, styles.bounce, styles.textFlash) }>Your notifications</p>
+        <p
+          className={ css(styles.p, styles.bounce, styles.textFlash) }
+          onClick={this.props.handleDisplayDrawer} >
+          Your notifications
+        </p>
     </div>
     { this.props.displayDrawer ? <div className={ css(styles.notifications) }>
       <button aria-label="Close"
-              onClick={ this.closeNotifications }
+              onClick={ this.props.handleHideDrawer }
               style={
                 {position: "absolute",
                 top: 10,

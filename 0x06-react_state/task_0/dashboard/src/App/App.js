@@ -35,7 +35,12 @@ export default class App extends Component {
 
   constructor(props) {
     super(props)
+    this.state = {
+      displayDrawer: true
+    }
     this.handleLogout = this.handleLogout.bind(this);
+    this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
+    this.handleHideDrawer = this.handleHideDrawer.bind(this);
   }
 
   componentDidMount() {
@@ -46,12 +51,21 @@ export default class App extends Component {
     window.removeEventListener("keydown", this.handleLogout);
   }
 
-  handleLogout (event) {
+  handleLogout(event) {
     if (event.ctrlKey && event.key === 'h') {
         event.preventDefault();
         alert("Logging you out");
         this.props.logOut();
     }
+  }
+
+  handleDisplayDrawer() {
+    this.setState({displayDrawer: true});
+  }
+
+  handleHideDrawer() {
+    console.log("yes");
+    this.setState({displayDrawer: false});
   }
 
   render() {
@@ -70,7 +84,12 @@ export default class App extends Component {
 
     return (
       <>
-        <Notifications listNotifications={ listNotifications }/>
+        <Notifications
+          listNotifications={ listNotifications }
+          displayDrawer={ this.state.displayDrawer }
+          handleDisplayDrawer={ this.handleDisplayDrawer }
+          handleHideDrawer={ this.handleHideDrawer }
+        />
         <div className={css(styles.app)}>
           <div className={css(styles.header)}>
             <Header/>
