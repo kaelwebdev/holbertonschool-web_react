@@ -32,8 +32,6 @@ export default class Notifications extends Component {
       return true;
     }
     if (this.props.displayDrawer !== nextProps.displayDrawer) {
-      console.log(this.props.displayDrawer);
-      console.log(nextProps.displayDrawer);
       this.displayDrawer = this.props.displayDrawer;
       return true;
     }
