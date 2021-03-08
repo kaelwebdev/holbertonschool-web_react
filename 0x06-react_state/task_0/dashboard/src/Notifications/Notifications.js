@@ -59,10 +59,10 @@ export default class Notifications extends Component {
   
   render() {
     return <>
-    <div className={ css(styles.menuItem) }>
+    <div className={ css(styles.menuItem) }
+      onClick={this.props.handleDisplayDrawer} data-test-id="notificationBtn">
         <p
-          className={ css(styles.p, styles.bounce, styles.textFlash) }
-          onClick={this.props.handleDisplayDrawer} data-test-id="notificationBtn">
+          className={ css(styles.p, styles.bounce, styles.textFlash) }>
           Your notifications
         </p>
     </div>
