@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import Notifications from './Notifications';
 import { StyleSheetTestUtils } from "aphrodite";
 
@@ -133,6 +133,58 @@ describe("Notifications.test.js - pure component", () => {
     wrapper.setProps({ listNotifications:ns2 });
     expect(shouldComponentUpdate).toHaveBeenCalled();
     expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
+
+    jest.restoreAllMocks();
+  });
+
+  it('handleDisplayDrawer', () => {
+    const ns = [
+      {id: 1, html: undefined, type: "default", value: "New course available"},
+    ];
+
+    const fakeState = { displayDrawer: false }
+
+    const handleDisplayDrawer = jest.fn( () => {
+      fakeState.displayDrawer = true;
+    });
+
+    const wrapper = mount(
+      <Notifications
+        listNotifications={ ns }
+        displayDrawer={ fakeState.displayDrawer }
+        handleDisplayDrawer={ handleDisplayDrawer }
+      />
+    );
+
+    wrapper.find(`[data-test-id="notificationBtn"]`).simulate('click');
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+    expect(fakeState.displayDrawer).toEqual(true)
+
+    jest.restoreAllMocks();
+  });
+
+  it('handleHideDrawer', () => {
+    const ns = [
+      {id: 1, html: undefined, type: "default", value: "New course available"},
+    ];
+
+    const fakeState = { displayDrawer: true }
+
+    const handleHideDrawer = jest.fn( () => {
+      fakeState.displayDrawer = false;
+    });
+
+    const wrapper = mount(
+      <Notifications
+        listNotifications={ ns }
+        displayDrawer={ fakeState.displayDrawer }
+        handleHideDrawer={ handleHideDrawer }
+      />
+    );
+
+    wrapper.find(`[data-test-id="closeNotificationBtn"]`).simulate('click');
+    expect(handleHideDrawer).toHaveBeenCalled();
+    expect(fakeState.displayDrawer).toEqual(false)
 
     jest.restoreAllMocks();
   });

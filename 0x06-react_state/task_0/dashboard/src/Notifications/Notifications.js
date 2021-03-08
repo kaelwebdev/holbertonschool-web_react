@@ -62,7 +62,7 @@ export default class Notifications extends Component {
     <div className={ css(styles.menuItem) }>
         <p
           className={ css(styles.p, styles.bounce, styles.textFlash) }
-          onClick={this.props.handleDisplayDrawer} >
+          onClick={this.props.handleDisplayDrawer} data-test-id="notificationBtn">
           Your notifications
         </p>
     </div>
@@ -75,6 +75,7 @@ export default class Notifications extends Component {
                 right: 10,
                 visibility: "hidden"}
               }
+              data-test-id="closeNotificationBtn"
       >
       <img alt="close" src={imgClose}
             style={

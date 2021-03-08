@@ -64,7 +64,6 @@ export default class App extends Component {
   }
 
   handleHideDrawer() {
-    console.log("yes");
     this.setState({displayDrawer: false});
   }
 
