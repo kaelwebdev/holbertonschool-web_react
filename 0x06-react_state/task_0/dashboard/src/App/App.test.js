@@ -73,4 +73,26 @@ describe("App.test.js - events", () => {
     window.dispatchEvent(event);
     expect(window.alert).toHaveBeenCalledWith('Logging you out');
   });
+
+  it('handleDisplayDrawer', () => {
+    wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toEqual(true);
+    const handleDisplayDrawer = jest.spyOn(wrapper.instance(), 'handleDisplayDrawer');
+    wrapper.setState({
+      displayDrawer: false
+    });
+    expect(wrapper.state().displayDrawer).toEqual(false);
+    wrapper.instance().handleDisplayDrawer();
+    expect(handleDisplayDrawer).toHaveBeenCalled();
+    expect(wrapper.state().displayDrawer).toEqual(true);
+  });
+
+  it('handleHideDrawer', () => {
+    wrapper = shallow(<App />);
+    expect(wrapper.state().displayDrawer).toEqual(true);
+    const handleHideDrawer = jest.spyOn(wrapper.instance(), 'handleHideDrawer');
+    wrapper.instance().handleHideDrawer();
+   expect(handleHideDrawer).toHaveBeenCalled();
+    expect(wrapper.state().displayDrawer).toEqual(false);
+  });
 });
