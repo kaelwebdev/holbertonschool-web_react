@@ -68,6 +68,7 @@ export default class App extends Component {
   }
 
   render() {
+    const { displayDrawer } = this.state;
     let mainArea = (
       <BodySectionWithMarginBottom title='Log in to continue'>
       <Login />
@@ -85,7 +86,7 @@ export default class App extends Component {
       <>
         <Notifications
           listNotifications={ listNotifications }
-          displayDrawer={ this.state.displayDrawer }
+          displayDrawer={ displayDrawer }
           handleDisplayDrawer={ this.handleDisplayDrawer }
           handleHideDrawer={ this.handleHideDrawer }
         />
