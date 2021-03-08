@@ -148,7 +148,7 @@ describe("Notifications.test.js - pure component", () => {
       />
     );
 
-    wrapper.find(`[data-test-id="notificationBtn"]`).simulate("click");
+    wrapper.find("#menuItem").simulate("click");
 
     expect(handleDisplayDrawer).toHaveBeenCalled();
     expect(handleHideDrawer).not.toHaveBeenCalled();
@@ -168,7 +168,7 @@ describe("Notifications.test.js - pure component", () => {
       />
     );
 
-    wrapper.find(`[data-test-id="closeNotificationBtn"]`).simulate("click");
+    wrapper.find("#closeNotifications").simulate("click");
 
     expect(handleDisplayDrawer).not.toHaveBeenCalled();
     expect(handleHideDrawer).toHaveBeenCalled();
