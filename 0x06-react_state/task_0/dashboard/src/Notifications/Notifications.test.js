@@ -116,7 +116,7 @@ describe("Notifications.test.js - pure component", () => {
     jest.restoreAllMocks();
 
   });
-/*
+
   it('allow render component', () => {
     const ns = [
       {id: 1, html: undefined, type: "default", value: "New course available"},
@@ -135,5 +135,5 @@ describe("Notifications.test.js - pure component", () => {
     expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
 
     jest.restoreAllMocks();
-  });*/
+  });
 });
