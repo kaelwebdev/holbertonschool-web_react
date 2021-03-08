@@ -138,40 +138,45 @@ describe("Notifications.test.js - pure component", () => {
   });
 
   it('handleDisplayDrawer', () => {
-    const handleDisplayDrawer = jest.fn();
-    const handleHideDrawer = jest.fn();
 
-    const wrapper = shallow(
+    const fakeState = { displayDrawer: false }
+
+    const handleDisplayDrawer = jest.fn( () => {
+      fakeState.displayDrawer = true;
+    });
+
+    const wrapper = mount(
       <Notifications
-        handleDisplayDrawer={handleDisplayDrawer}
-        handleHideDrawer={handleHideDrawer}
+        displayDrawer={ fakeState.displayDrawer }
+        handleDisplayDrawer={ handleDisplayDrawer }
       />
     );
 
-    wrapper.find("#menuItem").simulate("click");
-
+    wrapper.find(`[data-test-id="notificationBtn"]`).simulate('click');
     expect(handleDisplayDrawer).toHaveBeenCalled();
-    expect(handleHideDrawer).not.toHaveBeenCalled();
+    expect(fakeState.displayDrawer).toEqual(true)
     
     jest.restoreAllMocks();
   });
 
   it('handleHideDrawer', () => {
-    const handleDisplayDrawer = jest.fn();
-    const handleHideDrawer = jest.fn();
 
-    const wrapper = shallow(
+    const fakeState = { displayDrawer: true }
+
+    const handleHideDrawer = jest.fn( () => {
+      fakeState.displayDrawer = false;
+    });
+
+    const wrapper = mount(
       <Notifications
-        displayDrawer
-        handleDisplayDrawer={handleDisplayDrawer}
-        handleHideDrawer={handleHideDrawer}
+        displayDrawer={ fakeState.displayDrawer }
+        handleHideDrawer={ handleHideDrawer }
       />
     );
 
-    wrapper.find("#closeNotifications").simulate("click");
-
-    expect(handleDisplayDrawer).not.toHaveBeenCalled();
+    wrapper.find(`[data-test-id="closeNotificationBtn"]`).simulate('click');
     expect(handleHideDrawer).toHaveBeenCalled();
+    expect(fakeState.displayDrawer).toEqual(false)
 
     jest.restoreAllMocks();
   });
