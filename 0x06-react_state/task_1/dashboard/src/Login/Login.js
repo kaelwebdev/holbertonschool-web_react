@@ -46,7 +46,9 @@ export default class Login extends Component {
     return (
       <>
         <p>Login to access the full dashboard</p>
-        <form className={ css(styles.loginForm, styles.only900) }>
+        <form
+        className={ css(styles.loginForm, styles.only900) }
+        onSubmit={ this.handleLoginSubmit } >
           <label htmlFor="email">Email: </label>
           <input
             id="email" type="email" value={ this.state.email } name="email"
