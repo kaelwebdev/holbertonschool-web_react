@@ -31,4 +31,32 @@ describe("Login.test.js", () => {
     wrapper = shallow(<Login/>);
     expect(wrapper.find('label').length).toEqual(2);
   });
+  it("the submit button is disabled by default", () => {
+    const wrapper = shallow(<Login />);
+    const submitInput = wrapper.find("form input[type='submit']");
+
+    expect(submitInput).toHaveLength(1);
+    expect(submitInput.prop("disabled")).toEqual(true);
+  });
+
+  it("after changing the value of the two inputs, the button is enabled", () => {
+    const wrapper = shallow(<Login />);
+    const emailInput = wrapper.find("#email");
+    const passwordInput = wrapper.find("#password");
+
+    emailInput.simulate("change", {
+      target: { name: "email", value: "123@hotmail.com" },
+    });
+
+    let submitInput = wrapper.find("form input[type='submit']");
+
+    expect(submitInput.prop("disabled")).toEqual(true);
+
+    passwordInput.simulate("change", {
+      target: { name: "password", value: "123" },
+    });
+
+    submitInput = wrapper.find("form input[type='submit']");
+    expect(submitInput.prop("disabled")).toEqual(false);
+  });
 });
