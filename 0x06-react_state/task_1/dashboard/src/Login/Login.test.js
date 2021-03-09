@@ -25,7 +25,7 @@ describe("Login.test.js", () => {
   });
   it('inputs exist', () => {
     wrapper = shallow(<Login/>);
-    expect(wrapper.find('input').length).toEqual(2);
+    expect(wrapper.find('input').length).toEqual(3);
   });
   it('labels exist', () => {
     wrapper = shallow(<Login/>);

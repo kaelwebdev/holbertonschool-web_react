@@ -2,6 +2,45 @@ import React, { Component } from 'react';
 import {StyleSheet, css} from 'aphrodite';
 
 export default class Login extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isLoggedIn: false,
+      email: "",
+      password: "",
+      enableSubmit: false,
+    }
+    this.handleLoginSubmit  = this.handleLoginSubmit.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+  }
+
+  handleLoginSubmit(e) {
+    e.preventDefault();
+    this.setState({
+      isLoggedIn: true
+    });
+  }
+
+  handleChangeEmail(e) {
+    this.setState({
+        email: e.target.value,
+    });
+    this.setState(state => ({
+        enableSubmit: (state.email !== "" && state.password !== ""),
+      })
+    );
+  }
+
+  handleChangePassword(e) {
+    this.setState({
+        password: e.target.value,
+    });
+    this.setState(state => ({
+        enableSubmit: (state.email !== "" && state.password !== "")
+      })
+    );
+  }
 
   render() {
     return (
@@ -9,10 +48,17 @@ export default class Login extends Component {
         <p>Login to access the full dashboard</p>
         <form className={ css(styles.loginForm, styles.only900) }>
           <label htmlFor="email">Email: </label>
-          <input id="email" type="text" className={css(styles.inputForm)} />
+          <input
+            id="email" type="email" value={ this.state.email } name="email"
+            className={css(styles.inputForm) } onChange={ this.handleChangeEmail }/>
           <label htmlFor="password"> Password: </label>
-          <input id="password" type="text" className={css(styles.inputForm)} />
-          <button id="btnForm" className={css(styles.btnForm)}>OK</button>
+          <input
+            id="password" type="password" value={ this.state.password } name="password"
+            className={css(styles.inputForm)} onChange={ this.handleChangePassword }/>
+          <input
+            id="btnForm" type="submit" name="btnForm"
+            value="OK"className={css(styles.btnForm)}
+            disabled={ !this.state.enableSubmit }/>
         </form>
       </>
     )
