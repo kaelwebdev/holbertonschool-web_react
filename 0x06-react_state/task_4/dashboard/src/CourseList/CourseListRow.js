@@ -1,50 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 
 
-const rowStyle = {
-  backgroundColor : '#f5f5f5ab'
-};
+function CourseListRow (props) {
+  const [checked, setChecked] = React.useState(false);
 
-const headerRowStyle = {
-  backgroundColor : '#deb5b545'
-};
+  const rowStyle = checked ? css(styles.rowChecked) : css(styles.rowStyle);
+  const headerRowStyle = css(styles.tr, styles.headerRowStyle );
 
-class CourseListRow extends Component {
-  render() {
-    if (this.props.isHeader) {
-      if (this.props.textSecondCell === null) {
-        return (
-          <tr style={ headerRowStyle } className={ css(styles.tr) }>
-            <th colSpan="2" className={ css(styles.th) }>
-              { this.props.textFirstCell}
-            </th>
-          </tr>
-        );
-      }
+  if (props.isHeader) {
+    if (props.textSecondCell === null) {
       return (
-        <tr style={ headerRowStyle } >
-          <th className={ css(styles.th) }>
-            { this.props.textFirstCell }
-          </th>
-          <th className={ css(styles.th) }>
-            { this.props.textSecondCell }
+        <tr className={ headerRowStyle }>
+          <th colSpan="2" className={ css(styles.th) }>
+            { props.textFirstCell}
           </th>
         </tr>
       );
     }
     return (
-      <tr style={rowStyle} >
-        <td className={ css(styles.td) }>
-          { this.props.textFirstCell }
-        </td>
-        <td className={ css(styles.td) }>
-          { this.props.textSecondCell }
-        </td>
+      <tr className={ headerRowStyle } >
+        <th className={ css(styles.th) }>
+          { props.textFirstCell }
+        </th>
+        <th className={ css(styles.th) }>
+          { props.textSecondCell }
+        </th>
       </tr>
     );
   }
+  return (
+    <tr className={ rowStyle } >
+      <td className={ css(styles.td) }>
+      <input type="checkbox" onChange={() => setChecked(!checked)}/>
+        { props.textFirstCell }
+      </td>
+      <td className={ css(styles.td) }>
+        { props.textSecondCell }
+      </td>
+    </tr>
+  );
 }
 
 CourseListRow.propTypes = {
@@ -73,7 +69,16 @@ const styles = StyleSheet.create({
   },
   tr: {
     textAlign: 'center'
-  }
+  },
+  rowChecked : {
+    backgroundColor: '#e6e4e4'
+  },
+  rowStyle: {
+    backgroundColor : '#f5f5f5ab'
+  },
+  headerRowStyle: {
+    backgroundColor : '#deb5b545'
+  },
 });
 
 export default CourseListRow;
