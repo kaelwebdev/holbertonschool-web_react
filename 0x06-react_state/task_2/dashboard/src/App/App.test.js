@@ -4,6 +4,8 @@ import App from './App';
 import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
 import { StyleSheetTestUtils } from "aphrodite";
+import AppContext, { user, logOut } from "../App/AppContext";
+
 
 describe("App.test.js", () => {
   let wrapper;
@@ -100,5 +102,43 @@ describe("App.test.js - events", () => {
     wrapper.instance().handleHideDrawer();
    expect(handleHideDrawer).toHaveBeenCalled();
     expect(wrapper.state().displayDrawer).toEqual(false);
+  });
+
+  it("logIn function updates the state correctly", () => {
+    wrapper = mount(
+      <AppContext.Provider value={{ user, logOut }}>
+        <App />
+      </AppContext.Provider>
+    );
+
+    const user1 = {
+      email: "123@hotmail.com",
+      password: "123",
+      isLoggedIn: true,
+    };
+
+    expect(wrapper.state().user).toEqual(user);
+    wrapper.instance().logIn(user1.email, user1.password);
+    expect(wrapper.state().user).toEqual(user1);
+  });
+
+  it("logOut function updates the state correctly", () => {
+    wrapper = mount(
+      <AppContext.Provider value={{ user, logOut }}>
+        <App />
+      </AppContext.Provider>
+    );
+
+    const user1 = {
+      email: "123@hotmail.com",
+      password: "123",
+      isLoggedIn: true,
+    };
+
+    expect(wrapper.state().user).toEqual(user);
+    wrapper.instance().logIn(user1.email, user1.password);
+    expect(wrapper.state().user).toEqual(user1);
+    wrapper.instance().logOut();
+    expect(wrapper.state().user).toEqual(user);
   });
 });
