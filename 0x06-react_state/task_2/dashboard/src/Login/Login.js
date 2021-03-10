@@ -1,7 +1,18 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import {StyleSheet, css} from 'aphrodite';
 
+
 export default class Login extends Component {
+
+  static propTypes = {
+    logIn: PropTypes.func
+  }
+
+  static defaultProps  = {
+    logIn: () => void(0)
+  }
+
   constructor(props) {
     super(props)
     this.state = {
@@ -17,9 +28,8 @@ export default class Login extends Component {
 
   handleLoginSubmit(e) {
     e.preventDefault();
-    this.setState({
-      isLoggedIn: true
-    });
+    const { email, password } = this.state;
+    this.props.logIn(email, password);
   }
 
   handleChangeEmail(e) {

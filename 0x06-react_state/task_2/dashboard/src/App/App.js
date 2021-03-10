@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -9,6 +8,9 @@ import { getLatestNotification } from '../utils/utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import {StyleSheet, css} from 'aphrodite';
+import { user } from "./AppContext";
+import AppContext from "./AppContext";
+
 
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},
@@ -23,24 +25,19 @@ const listNotifications = [
 ];
 
 export default class App extends Component {
-  static propTypes = {
-    isLoggedIn: PropTypes.bool,
-    logOut: PropTypes.func
-  }
-
-  static defaultProps  = {
-    isLoggedIn: false,
-    logOut: () => void(0)
-  }
 
   constructor(props) {
     super(props)
-    this.state = {
-      displayDrawer: true
-    }
     this.handleLogout = this.handleLogout.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
+    this.logIn = this.logIn.bind(this);
+    this.logOut = this.logOut.bind(this);
+    this.state = {
+      displayDrawer: false,
+      user,
+      logOut: this.logOut,
+    }
   }
 
   componentDidMount() {
@@ -67,14 +64,36 @@ export default class App extends Component {
     this.setState({displayDrawer: false});
   }
 
+  logIn(email, password) {
+    this.setState({
+        user: {
+          email: email,
+          password: password,
+          isLoggedIn: true,
+        },
+    });
+  }
+
+  logOut() {
+    console.log("yes")
+    this.setState({
+        user: user,
+    });
+  }
+
   render() {
-    const { displayDrawer } = this.state;
+    const {
+        displayDrawer,
+        user,
+        logOut
+    } = this.state;
+
     let mainArea = (
       <BodySectionWithMarginBottom title='Log in to continue'>
-      <Login />
+        <Login logIn={ this.logIn }/>
       </BodySectionWithMarginBottom>
     );
-    if (this.props.isLoggedIn) {
+    if (this.state.user.isLoggedIn) {
       mainArea = (
         <BodySectionWithMarginBottom title='Course list' >
           <CourseList listCourses={listCourses} />
@@ -82,8 +101,10 @@ export default class App extends Component {
        );
     }
 
+    const appContextValues = { user, logOut };
+
     return (
-      <>
+      <AppContext.Provider value={ appContextValues }>
         <Notifications
           listNotifications={ listNotifications }
           displayDrawer={ displayDrawer }
@@ -112,7 +133,7 @@ export default class App extends Component {
             <Footer/>
           </div>
         </div>
-      </>
+      </AppContext.Provider>
     );
   }
 }
