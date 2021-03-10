@@ -33,10 +33,12 @@ export default class App extends Component {
     this.handleHideDrawer = this.handleHideDrawer.bind(this);
     this.logIn = this.logIn.bind(this);
     this.logOut = this.logOut.bind(this);
+    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
       displayDrawer: false,
       user,
       logOut: this.logOut,
+      listNotifications
     }
   }
 
@@ -80,6 +82,16 @@ export default class App extends Component {
     });
   }
 
+  markNotificationAsRead(id) {
+    this.setState(
+      state => (
+        {
+          listNotifications: state.listNotifications.filter(x => x.id !== id)
+        }
+      )
+    );
+  }
+
   render() {
     const {
         displayDrawer,
@@ -105,10 +117,11 @@ export default class App extends Component {
     return (
       <AppContext.Provider value={ appContextValues }>
         <Notifications
-          listNotifications={ listNotifications }
+          listNotifications={ this.state.listNotifications }
           displayDrawer={ displayDrawer }
           handleDisplayDrawer={ this.handleDisplayDrawer }
           handleHideDrawer={ this.handleHideDrawer }
+          markNotificationAsRead={this.markNotificationAsRead}
         />
         <div className={css(styles.app)}>
           <div className={css(styles.header)}>
