@@ -76,11 +76,7 @@ describe("App.test.js - events", () => {
 
   it('handleDisplayDrawer', () => {
     wrapper = shallow(<App />);
-    expect(wrapper.state().displayDrawer).toEqual(true);
     const handleDisplayDrawer = jest.spyOn(wrapper.instance(), 'handleDisplayDrawer');
-    wrapper.setState({
-      displayDrawer: false
-    });
     expect(wrapper.state().displayDrawer).toEqual(false);
     wrapper.instance().handleDisplayDrawer();
     expect(handleDisplayDrawer).toHaveBeenCalled();
@@ -89,6 +85,9 @@ describe("App.test.js - events", () => {
 
   it('handleHideDrawer', () => {
     wrapper = shallow(<App />);
+    wrapper.setState({
+      displayDrawer: true
+    });
     expect(wrapper.state().displayDrawer).toEqual(true);
     const handleHideDrawer = jest.spyOn(wrapper.instance(), 'handleHideDrawer');
     wrapper.instance().handleHideDrawer();

@@ -52,7 +52,7 @@ export default class App extends Component {
     if (event.ctrlKey && event.key === 'h') {
         event.preventDefault();
         alert("Logging you out");
-        this.props.logOut();
+        this.state.logOut();
     }
   }
 

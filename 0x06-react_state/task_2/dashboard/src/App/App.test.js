@@ -40,12 +40,19 @@ describe("App.test.js", () => {
     wrapper = shallow(<App />);
     expect(wrapper.find(CourseList).exists()).toEqual(false);
   });
-  it('CourseList exist when isLoggedIn = true', () => {
-    wrapper = shallow(<App isLoggedIn={ true } />);
+  it('CourseList exist when isLoggedIn == true', () => {
+    wrapper = shallow(<App />);
+    wrapper.setState({
+      user: {
+        email: "",
+        password: "",
+        isLoggedIn: true,
+      },
+    })
     expect(wrapper.find(CourseList).exists()).toEqual(true);
   });
-  it('CourseList exist when isLoggedIn = false', () => {
-    wrapper = shallow(<App isLoggedIn={ false } />);
+  it('CourseList no exist when isLoggedIn == false', () => {
+    wrapper = shallow(<App />);
     expect(wrapper.find(Login).exists()).toEqual(true);
   });
 });
@@ -76,11 +83,7 @@ describe("App.test.js - events", () => {
 
   it('handleDisplayDrawer', () => {
     wrapper = shallow(<App />);
-    expect(wrapper.state().displayDrawer).toEqual(true);
     const handleDisplayDrawer = jest.spyOn(wrapper.instance(), 'handleDisplayDrawer');
-    wrapper.setState({
-      displayDrawer: false
-    });
     expect(wrapper.state().displayDrawer).toEqual(false);
     wrapper.instance().handleDisplayDrawer();
     expect(handleDisplayDrawer).toHaveBeenCalled();
@@ -89,6 +92,9 @@ describe("App.test.js - events", () => {
 
   it('handleHideDrawer', () => {
     wrapper = shallow(<App />);
+    wrapper.setState({
+      displayDrawer: true
+    });
     expect(wrapper.state().displayDrawer).toEqual(true);
     const handleHideDrawer = jest.spyOn(wrapper.instance(), 'handleHideDrawer');
     wrapper.instance().handleHideDrawer();

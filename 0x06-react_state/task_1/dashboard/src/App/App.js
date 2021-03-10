@@ -36,7 +36,7 @@ export default class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      displayDrawer: true
+      displayDrawer: false
     }
     this.handleLogout = this.handleLogout.bind(this);
     this.handleDisplayDrawer = this.handleDisplayDrawer.bind(this);
