@@ -1,21 +1,35 @@
-import React, { Component } from 'react'
+import React from 'react';
 import { getFullYear, getFooterCopy } from '../utils/utils';
 import {StyleSheet, css} from 'aphrodite';
+import AppContext from "../App/AppContext";
 
 
-export default class Footer extends Component {
-  render() {
-    return (
-      <>
-        <p className={ css(styles.p) }>Copyright {getFullYear()} - {getFooterCopy()}</p>
-      </>
-    )
-  }
+function Footer() {
+  return (
+    <AppContext.Consumer>
+      {
+        context => {
+          return (
+            <>
+              <p className={ css(styles.p) }>
+                Copyright { getFullYear() } - { getFooterCopy() }
+              </p>
+              { context.user.isLoggedIn &&
+                <p><a href="#" >Contact us</a></p>
+              }
+            </>
+          );
+        }
+      }
+    
+    </AppContext.Consumer>
+  );
 }
 
 const styles = StyleSheet.create({
   p: {
-    textAlign: 'center',
     fontStyle: 'italic'
   }
 });
+
+export default Footer; 

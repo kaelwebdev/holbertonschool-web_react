@@ -159,6 +159,7 @@ const styles = StyleSheet.create({
     left: 0,
     padding: '20px',
     backgroundColor: 'white',
-    borderTop: '4px solid #E0354B'
+    borderTop: '4px solid #E0354B',
+    textAlign: 'center',
   }
 });
