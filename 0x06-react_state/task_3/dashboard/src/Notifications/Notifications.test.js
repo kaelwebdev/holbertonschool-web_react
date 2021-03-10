@@ -70,71 +70,16 @@ describe("Notifications.test.js", () => {
       wrapper.containsMatchingElement(<li>No new notification for now</li>)
     ).toBeTruthy();
   });
-  it('function markAsRead - correct log message', () => {
-    const ns = [
-      {id: 1, html: undefined, type: "default", value: "a"},
-      {id: 2, html: undefined, type: "default", value: "b"}
-    ];
-    wrapper = shallow(<Notifications displayDrawer={ true } listNotifications={ ns }/>);
-    
-    const markAsReadSpy = jest.spyOn(wrapper.instance(), 'markAsRead');
-    const consoleSpy = jest.spyOn(console, 'log');
 
-    wrapper.instance().markAsRead(ns[0].id);
-
-    expect(markAsReadSpy).toHaveBeenCalled();
-    expect(markAsReadSpy).toHaveBeenCalledWith(ns[0].id);
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
-
-    markAsReadSpy.mockRestore();
-    consoleSpy.mockRestore();
-  });
 });
 
-describe("Notifications.test.js - pure component", () => {
+describe("Notifications.test.js - handles", () => {
   beforeAll(() => {
     StyleSheetTestUtils.suppressStyleInjection();
   });
 
   afterAll(() => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
-  });
-
-  it('disallow render component', () => {
-    const ns = [
-      {id: 1, html: undefined, type: "default", value: "New course available"}
-    ];
-
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
-    
-    const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
-
-    wrapper.setProps({ listNotifications:ns });
-    expect(shouldComponentUpdate).toHaveBeenCalled();
-    expect(shouldComponentUpdate).toHaveLastReturnedWith(false);
-
-    jest.restoreAllMocks();
-
-  });
-
-  it('allow render component', () => {
-    const ns = [
-      {id: 1, html: undefined, type: "default", value: "New course available"},
-    ];
-    const ns2 = [
-      {id: 1, html: undefined, type: "default", value: "New course available"},
-      {id: 2, html: undefined, type: "urgent", value: "New resume available"}
-    ];
-
-    const wrapper = shallow(<Notifications displayDrawer={true} listNotifications={ns} />);
-    
-    const shouldComponentUpdate = jest.spyOn(Notifications.prototype, 'shouldComponentUpdate');
-
-    wrapper.setProps({ listNotifications:ns2 });
-    expect(shouldComponentUpdate).toHaveBeenCalled();
-    expect(shouldComponentUpdate).toHaveLastReturnedWith(true);
-
-    jest.restoreAllMocks();
   });
 
   it('handleDisplayDrawer', () => {

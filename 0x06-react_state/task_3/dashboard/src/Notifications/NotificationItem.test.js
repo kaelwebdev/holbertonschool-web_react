@@ -60,21 +60,4 @@ describe("NotificationItem.test.js - events", () => {
     StyleSheetTestUtils.clearBufferAndResumeStyleInjection();
   });
 
-
-  it('function markAsRead - correct log message -case 1', () => {
-
-    const ns = [
-      {id: 1, html: undefined, type: "default", value: "a"},
-      {id: 2, html: undefined, type: "default", value: "b"}
-    ];
-
-    const consoleSpy = jest.spyOn(console, 'log');
-    wrapper = mount(<Notifications displayDrawer={ true } listNotifications={ ns }/>);
-    wrapper.find(NotificationItem).at(0).simulate('click');
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 1 has been marked as read');
-    wrapper.find(NotificationItem).at(1).simulate('click');
-    expect(consoleSpy).toHaveBeenCalledWith('Notification 2 has been marked as read');
-    consoleSpy.mockRestore();
-  });
-
 });

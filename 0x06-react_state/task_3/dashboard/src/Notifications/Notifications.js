@@ -27,10 +27,6 @@ export default class Notifications extends PureComponent {
     super(props);
   }
 
-  markAsRead = id => {
-    console.log(`Notification ${id} has been marked as read`);
-  }
-
   renderNotification = x =>
     <NotificationItem key={ x.id } keyId={ x.id } type={ x.type }
     value={ x.value } html={ x.html } markAsRead={ this.props.markNotificationAsRead }/>
