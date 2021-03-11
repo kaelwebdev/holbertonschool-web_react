@@ -17,8 +17,8 @@ export default class Notifications extends Component {
   static defaultProps  = {
     displayDrawer: false,
     listNotifications: [],
-    handleDisplayDrawer: () => void(0),
-    handleHideDrawer: () => void(0),
+    handleDisplayDrawer: () => {},
+    handleHideDrawer: () => {},
   }
 
   constructor (props) {
@@ -58,9 +58,10 @@ export default class Notifications extends Component {
   }
   
   render() {
+    let {handleDisplayDrawer, handleHideDrawer} = this.props;
     return <>
     <div className={ css(styles.menuItem) }
-      onClick={this.props.handleDisplayDrawer} data-test-id="notificationBtn">
+      onClick={handleDisplayDrawer} data-test-id="notificationBtn">
         <p
           className={ css(styles.p, styles.bounce, styles.textFlash) }>
           Your notifications
@@ -68,7 +69,7 @@ export default class Notifications extends Component {
     </div>
     { this.props.displayDrawer ? <div className={ css(styles.notifications) }>
       <button aria-label="Close"
-              onClick={ this.props.handleHideDrawer }
+              onClick={handleHideDrawer}
               style={
                 {position: "absolute",
                 top: 10,
