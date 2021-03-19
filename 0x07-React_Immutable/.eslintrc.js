@@ -18,6 +18,8 @@ module.exports = {
   },
   plugins: ['jest'],
   rules: {
+    'arrow-parens': 'off',
+    'no-param-reassign': 'off',
     'no-console': 'off',
     'no-shadow': 'off',
     'no-restricted-syntax': [
