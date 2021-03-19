@@ -1,4 +1,4 @@
-import getImmutableObject from './0-fromjs.js';
+import getImmutableObject from './1-map.js';
 
 
 let obj = {
@@ -9,4 +9,3 @@ let obj = {
 }
 
 console.log(getImmutableObject(obj));
-
