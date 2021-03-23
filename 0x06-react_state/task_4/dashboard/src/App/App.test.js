@@ -5,6 +5,7 @@ import CourseList from '../CourseList/CourseList';
 import Login from '../Login/Login';
 import { StyleSheetTestUtils } from "aphrodite";
 import AppContext, { user, logOut } from "../App/AppContext";
+import { getLatestNotification } from '../utils/utils';
 
 
 describe("App.test.js", () => {
@@ -141,4 +142,20 @@ describe("App.test.js - events", () => {
     wrapper.instance().logOut();
     expect(wrapper.state().user).toEqual(user);
   });
+
+  it('verify that markNotificationAsRead works as intended.', (done) => {
+    const appContextValues = { user: user, logOut: logOut};
+    const listNotifications = [
+      {id: 1, html: undefined, type: "default", value: "New course available"},
+      {id: 2, html: undefined, type: "urgent", value: "New resume available"},
+      {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
+    ];
+    wrapper = mount(<AppContext.Provider value={appContextValues}><App/></AppContext.Provider>);
+    wrapper.setState({ listNotifications: listNotifications });
+    expect(wrapper.state().listNotifications.length).toEqual(3);
+    wrapper.instance().markNotificationAsRead(1);
+    expect(wrapper.state().listNotifications.length).toEqual(2);
+    done();
+  });
+
 });
