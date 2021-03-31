@@ -36,6 +36,7 @@
   "dependencies": {
     "aphrodite": "^2.4.0",
     "fetch-mock": "^9.11.0",
+    "immutable": "^4.0.0-rc.12",
     "node-fetch": "^2.6.1",
     "normalizr": "^3.6.1",
     "prop-types": "^15.7.2",
