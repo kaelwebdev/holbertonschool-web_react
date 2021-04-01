@@ -9,6 +9,6 @@ export const getNotifications = (state) => {
 export const getUnreadNotifications = (state) => {
   const notifications = Object.values(
     getNotifications(state).toJS()
-  );
-  return notifications.filter((notification) => notification.isRead );
+    );
+  return notifications.filter((notification) => notification.isRead);
 };
