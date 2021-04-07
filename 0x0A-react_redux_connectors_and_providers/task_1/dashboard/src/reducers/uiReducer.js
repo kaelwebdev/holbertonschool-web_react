@@ -11,7 +11,7 @@ export const initialState = {
   user: {},
 }
 
-export const uiReducer = (state = initialState, action) => {
+const uiReducer = (state = initialState, action) => {
   state = Map(state);
 
   switch (action.type) {
@@ -29,3 +29,5 @@ export const uiReducer = (state = initialState, action) => {
       return state.set('isUserLoggedIn', false);
   }
 };
+
+export default uiReducer;
