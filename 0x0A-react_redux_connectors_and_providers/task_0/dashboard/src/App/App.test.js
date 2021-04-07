@@ -132,14 +132,15 @@ describe("App.test.js - events", () => {
    expect(handleHideDrawer).toHaveBeenCalled();
     expect(wrapper.state().displayDrawer).toEqual(false);
   });
-/*
-  it("logIn function updates the state correctly", () => {
-    wrapper = mount(
-      <AppContext.Provider value={{ user, logOut }}>
-        <App />
-      </AppContext.Provider>
-    );
 
+  it("logIn function updates the state correctly", () => {
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(
+      <AppContext.Provider value={{ user, logOut }}>
+        <App store={store}/>
+      </AppContext.Provider>
+    ).dive().dive().dive();
     const user1 = {
       email: "123@hotmail.com",
       password: "123",
@@ -152,11 +153,13 @@ describe("App.test.js - events", () => {
   });
 
   it("logOut function updates the state correctly", () => {
-    wrapper = mount(
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(
       <AppContext.Provider value={{ user, logOut }}>
-        <App />
+        <App store={store}/>
       </AppContext.Provider>
-    );
+    ).dive().dive().dive();
 
     const user1 = {
       email: "123@hotmail.com",
@@ -178,13 +181,19 @@ describe("App.test.js - events", () => {
       {id: 2, html: undefined, type: "urgent", value: "New resume available"},
       {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
     ];
-    wrapper = mount(<AppContext.Provider value={appContextValues}><App/></AppContext.Provider>);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(
+      <AppContext.Provider value={appContextValues}>
+        <App store={store}/>
+      </AppContext.Provider>
+    ).dive().dive().dive();
     wrapper.setState({ listNotifications: listNotifications });
     expect(wrapper.state().listNotifications.length).toEqual(3);
     wrapper.instance().markNotificationAsRead(1);
     expect(wrapper.state().listNotifications.length).toEqual(2);
     done();
-  });*/
+  });
 
 });
 
