@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Notifications from "../Notifications/Notifications";
 import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
@@ -24,7 +25,7 @@ const listNotifications = [
   {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
 ];
 
-export default class App extends Component {
+class App extends Component {
 
   constructor(props) {
     super(props)
@@ -176,3 +177,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   }
 });
+
+const mapStateToProps =  (state) => {
+  return {
+    isLoggedIn: state.isUserLoggedIn,
+  }
+}
+
+export default connect(mapStateToProps , null)(App)
