@@ -6,6 +6,14 @@ import Login from '../Login/Login';
 import { StyleSheetTestUtils } from "aphrodite";
 import AppContext, { user, logOut } from "../App/AppContext";
 import { getLatestNotification } from '../utils/utils';
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { Map, fromJS } from "immutable";
+import { mapStateToProps } from './App';
+import {initialState as uiInitialState } from '../reducers/uiReducer'
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
 
 
 describe("App.test.js", () => {
@@ -24,38 +32,52 @@ describe("App.test.js", () => {
   });
 
   it('Correct component rendering', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(<App store={store}/>);
   });
 
   it('renders Header', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     expect(wrapper.find('Header').exists()).toEqual(true);
   });
   it('renders Login', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     expect(wrapper.find('Login').exists()).toEqual(true);
   });
   it('renders Footer', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     expect(wrapper.find('Footer').exists()).toEqual(true);
   });
   it('not renders CourseList by default', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     expect(wrapper.find(CourseList).exists()).toEqual(false);
   });
   it('CourseList exist when isLoggedIn == true', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(<App store={store}/>).dive().dive();
     wrapper.setState({
       user: {
         email: "",
         password: "",
         isLoggedIn: true,
       },
-    })
+    });
     expect(wrapper.find(CourseList).exists()).toEqual(true);
   });
   it('CourseList no exist when isLoggedIn == false', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     expect(wrapper.find(Login).exists()).toEqual(true);
   });
 });
@@ -77,7 +99,9 @@ describe("App.test.js - events", () => {
 
 
   it('Alert when user keydown ctrl+h', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = mount(<App store={store}/>);
     jest.spyOn(window, 'alert').mockImplementation(() => {});
     const event = new KeyboardEvent('keydown', {ctrlKey:true, key:'h'});
     window.dispatchEvent(event);
@@ -85,7 +109,9 @@ describe("App.test.js - events", () => {
   });
 
   it('handleDisplayDrawer', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(<App store={store}/>).dive().dive();
     const handleDisplayDrawer = jest.spyOn(wrapper.instance(), 'handleDisplayDrawer');
     expect(wrapper.state().displayDrawer).toEqual(false);
     wrapper.instance().handleDisplayDrawer();
@@ -94,7 +120,9 @@ describe("App.test.js - events", () => {
   });
 
   it('handleHideDrawer', () => {
-    wrapper = shallow(<App />);
+    const state = Map(uiInitialState);
+    const store = mockStore(state);
+    wrapper = shallow(<App store={store}/>).dive().dive();
     wrapper.setState({
       displayDrawer: true
     });
@@ -104,7 +132,7 @@ describe("App.test.js - events", () => {
    expect(handleHideDrawer).toHaveBeenCalled();
     expect(wrapper.state().displayDrawer).toEqual(false);
   });
-
+/*
   it("logIn function updates the state correctly", () => {
     wrapper = mount(
       <AppContext.Provider value={{ user, logOut }}>
@@ -156,6 +184,16 @@ describe("App.test.js - events", () => {
     wrapper.instance().markNotificationAsRead(1);
     expect(wrapper.state().listNotifications.length).toEqual(2);
     done();
-  });
+  });*/
 
 });
+
+describe("App.test.js - Redux Store", () => {
+  it('function mapStateToProps returns the right object', (done) => {
+    let state = fromJS({ isUserLoggedIn: true });
+    const r = mapStateToProps(state);
+    expect(r).toEqual({ isLoggedIn: true });
+    done();
+  });
+});
+
