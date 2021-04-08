@@ -62,14 +62,16 @@ describe("App.test.js", () => {
     expect(wrapper.find(CourseList).exists()).toEqual(false);
   });
   it('CourseList exist when isLoggedIn == true', () => {
-    const state = Map(uiInitialState);
-    const store = mockStore(state);
+    let state = Map(uiInitialState);
+    let store = mockStore( () => state);
+    const newUiInitialState = { ...uiInitialState, isUserLoggedIn: true }
+    state = Map(newUiInitialState);
+    store.dispatch({ type: 'LOGIN_SUCCESS' });
     wrapper = shallow(<App store={store}/>).dive().dive();
     wrapper.setState({
       user: {
         email: "",
         password: "",
-        isLoggedIn: true,
       },
     });
     expect(wrapper.find(CourseList).exists()).toEqual(true);
