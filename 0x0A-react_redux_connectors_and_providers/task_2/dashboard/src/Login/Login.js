@@ -16,7 +16,6 @@ export default class Login extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoggedIn: false,
       email: "",
       password: "",
       enableSubmit: false,

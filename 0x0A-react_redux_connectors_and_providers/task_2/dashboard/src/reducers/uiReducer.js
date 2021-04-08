@@ -1,6 +1,6 @@
 import { 
   LOGOUT, DISPLAY_NOTIFICATION_DRAWER, HIDE_NOTIFICATION_DRAWER,
-  LOGIN_SUCCESS, LOGIN_FAILURE,
+  LOGIN_SUCCESS, LOGIN_FAILURE, LOGIN,
 } from '../actions/uiActionTypes';
 
 import { Map } from 'immutable';
@@ -8,7 +8,7 @@ import { Map } from 'immutable';
 export const initialState = {
   isNotificationDrawerVisible: false,
   isUserLoggedIn: false,
-  user: {},
+  user: null,
 }
 
 export const uiReducer = (state = initialState, action) => {
@@ -26,7 +26,9 @@ export const uiReducer = (state = initialState, action) => {
     case LOGIN_FAILURE:
       return state.set('isUserLoggedIn', false);
     case LOGOUT:
-      return state.set('isUserLoggedIn', false);
+      return state.set('isUserLoggedIn', false).set("user", null);
+    case LOGIN:
+      return state.set('user', action.user);
   }
 };
 

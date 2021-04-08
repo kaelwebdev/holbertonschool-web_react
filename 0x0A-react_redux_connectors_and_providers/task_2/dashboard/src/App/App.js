@@ -10,8 +10,6 @@ import { getLatestNotification } from '../utils/utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import {StyleSheet, css} from 'aphrodite';
-import { user } from "./AppContext";
-import AppContext from "./AppContext";
 import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
 import { loginRequest, logout } from '../actions/uiActionCreators';
 
@@ -35,8 +33,6 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
-      user,
-      logOut: this.logOut,
       listNotifications
     }
   }
@@ -53,7 +49,7 @@ class App extends Component {
     if (event.ctrlKey && event.key === 'h') {
         event.preventDefault();
         alert("Logging you out");
-        this.state.logOut();
+        this.props.logout();
     }
   }
 
@@ -68,10 +64,6 @@ class App extends Component {
   }
 
   render() {
-    const {
-        user,
-        logOut
-    } = this.state;
 
     let mainArea = (
       <BodySectionWithMarginBottom title='Log in to continue'>
@@ -86,10 +78,8 @@ class App extends Component {
        );
     }
 
-    const appContextValues = { user, logOut };
-
     return (
-      <AppContext.Provider value={ appContextValues }>
+      <>
         <Notifications
           listNotifications={ this.state.listNotifications }
           displayDrawer={ this.props.displayDrawer }
@@ -119,7 +109,7 @@ class App extends Component {
             <Footer/>
           </div>
         </div>
-      </AppContext.Provider>
+      </>
     );
   }
 }
@@ -157,6 +147,7 @@ App.propTypes = {
   displayNotificationDrawer: PropTypes.func,
   hideNotificationDrawer: PropTypes.func,
   login: PropTypes.func,
+  logout: PropTypes.func,
 };
 
 App.defaultProps = {
@@ -165,6 +156,7 @@ App.defaultProps = {
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
   login: () => {},
+  logout: () => {},
 };
 
 export const mapStateToProps =  (state) => {

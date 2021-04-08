@@ -11,7 +11,7 @@ function Footer(props) {
             <p className={ css(styles.p) }>
               Copyright { getFullYear() } - { getFooterCopy() }
             </p>
-            { typeof user === 'object' && Object.keys(user).length !== 0 &&
+            { user &&
               <p><a href="#" >Contact us</a></p>
             }
           </footer>
