@@ -13,6 +13,8 @@ import {StyleSheet, css} from 'aphrodite';
 import { user } from "./AppContext";
 import AppContext from "./AppContext";
 import { displayNotificationDrawer, hideNotificationDrawer } from '../actions/uiActionCreators';
+import { loginRequest, logout } from '../actions/uiActionCreators';
+
 
 const listCourses = [
   {id: 1, name: 'ES6', credit: 60},
@@ -31,8 +33,6 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this);
-    this.logIn = this.logIn.bind(this);
-    this.logOut = this.logOut.bind(this);
     this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
     this.state = {
       user,
@@ -57,22 +57,6 @@ class App extends Component {
     }
   }
 
-  logIn(email, password) {
-    this.setState({
-        user: {
-          email: email,
-          password: password,
-          isLoggedIn: true,
-        },
-    });
-  }
-
-  logOut() {
-    this.setState({
-        user: user,
-    });
-  }
-
   markNotificationAsRead(id) {
     this.setState(
       state => (
@@ -91,7 +75,7 @@ class App extends Component {
 
     let mainArea = (
       <BodySectionWithMarginBottom title='Log in to continue'>
-        <Login logIn={ this.logIn }/>
+        <Login logIn={ this.props.login }/>
       </BodySectionWithMarginBottom>
     );
     if (this.props.isLoggedIn) {
@@ -172,6 +156,7 @@ App.propTypes = {
   displayDrawer: PropTypes.bool,
   displayNotificationDrawer: PropTypes.func,
   hideNotificationDrawer: PropTypes.func,
+  login: PropTypes.func,
 };
 
 App.defaultProps = {
@@ -179,6 +164,7 @@ App.defaultProps = {
   displayDrawer: false,
   displayNotificationDrawer: () => {},
   hideNotificationDrawer: () => {},
+  login: () => {},
 };
 
 export const mapStateToProps =  (state) => {
@@ -191,6 +177,8 @@ export const mapStateToProps =  (state) => {
 export const mapDispatchToProps = {
   displayNotificationDrawer,
   hideNotificationDrawer,
+  login: loginRequest,
+  logout
 };
 
 export default connect(mapStateToProps , mapDispatchToProps)(App)

@@ -1,16 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from "react-redux";
-import { createStore } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
+import ReduxThunk from 'redux-thunk';
 import { Map } from "immutable";
 import App from './App/App';
 import uiReducer, { initialState } from "./reducers/uiReducer";
 import './index.css';
 
 const composeEnhancers =
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
-const store = createStore(uiReducer, Map(initialState), composeEnhancers);
+const store = createStore(
+  uiReducer,
+  Map(initialState),
+  composeEnhancers(applyMiddleware(ReduxThunk))
+);
 
 ReactDOM.render(
   <React.StrictMode>
