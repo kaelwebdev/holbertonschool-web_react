@@ -94,7 +94,7 @@ class App extends Component {
         <Login logIn={ this.logIn }/>
       </BodySectionWithMarginBottom>
     );
-    if (this.state.user.isLoggedIn) {
+    if (this.props.isLoggedIn) {
       mainArea = (
         <BodySectionWithMarginBottom title='Course list' >
           <CourseList listCourses={listCourses} />
