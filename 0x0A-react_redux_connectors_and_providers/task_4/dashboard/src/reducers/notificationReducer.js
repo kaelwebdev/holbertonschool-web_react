@@ -9,7 +9,7 @@ export const initialState = {
   filter: 'DEFAULT'
 }
 
-export const notificationReducer = (state = Map(initialState), action) => {
+const notificationReducer = (state = Map(initialState), action) => {
   switch(action.type) {
     default:
       return state;
@@ -27,5 +27,6 @@ export const notificationReducer = (state = Map(initialState), action) => {
     case SET_TYPE_FILTER:
       return state.set('filter', action.filter);
   }
-
 }
+
+export default notificationReducer;

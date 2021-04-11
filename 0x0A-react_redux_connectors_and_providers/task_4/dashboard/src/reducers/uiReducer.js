@@ -11,7 +11,7 @@ export const initialState = {
   user: null,
 }
 
-export const uiReducer = (state = initialState, action) => {
+const uiReducer = (state = initialState, action) => {
   state = Map(state);
 
   switch (action.type) {

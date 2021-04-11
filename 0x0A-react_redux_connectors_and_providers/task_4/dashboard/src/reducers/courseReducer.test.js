@@ -1,5 +1,5 @@
 import { fetchCourseSuccess, selectCourse, unSelectCourse } from '../actions/courseActionCreators';
-import { courseReducer } from './courseReducer';
+import courseReducer from './courseReducer';
 import { coursesNormalizer } from '../schema/courses';
 
 import { Map, fromJS } from 'immutable';

@@ -7,7 +7,7 @@ import { StyleSheetTestUtils } from "aphrodite";
 import { Map, fromJS } from "immutable";
 import { mapStateToProps } from './App';
 
-import {initialState as uiInitialState } from '../reducers/uiReducer';
+import {initialState as rootRIS } from '../reducers/rootReducer';
 
  import Header from '../Header/Header';
  import Footer from '../Footer/Footer';
@@ -108,14 +108,16 @@ describe("App.test.js - events", () => {
 
 describe("App.test.js - Redux Store", () => {
   it('function mapStateToProps returns the right object - isUserLoggedIn', (done) => {
-    let state = fromJS(uiInitialState);
+    let state = rootRIS;
     let r = mapStateToProps(state);
     expect(r).toEqual({ isLoggedIn: false, displayDrawer: false });
-    state = fromJS({
-      isNotificationDrawerVisible: true,
-      isUserLoggedIn: false,
-      user: null
-    });
+    state = {
+      ui: Map ({
+        isNotificationDrawerVisible: true,
+        isUserLoggedIn: false,
+        user: null
+      })
+    };
     r = mapStateToProps(state);
     expect(r).toEqual({ isLoggedIn: false, displayDrawer: true });
     done();
@@ -123,14 +125,16 @@ describe("App.test.js - Redux Store", () => {
 
   it('function mapStateToProps returns the right object - displayDrawer', (done) => {
 
-    let state = fromJS(uiInitialState);
+    let state = rootRIS;
     let r = mapStateToProps(state);
     expect(r).toEqual({ isLoggedIn: false, displayDrawer: false });
-    state = fromJS({
-      isNotificationDrawerVisible: true,
-      isUserLoggedIn: false,
-      user: null
-    });
+    state = {
+      ui: Map({
+        isNotificationDrawerVisible: true,
+        isUserLoggedIn: false,
+        user: null
+      })
+    };
     r = mapStateToProps(state);
     expect(r).toEqual({ isLoggedIn: false, displayDrawer: true });
     done();

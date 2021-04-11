@@ -1,7 +1,7 @@
 import { 
   setNotificationFilter, markAsAread, FetchNotificationsSuccess
  } from '../actions/notificationActionCreators';
-import { notificationReducer } from './notificationReducer';
+import notificationReducer from './notificationReducer';
 import { notificationsNormalizer } from '../schema/notifications';
 
 import { Map, fromJS } from 'immutable';

@@ -4,7 +4,9 @@ import {
 import { Map } from 'immutable';
 import { coursesNormalizer } from '../schema/courses';
 
-export const courseReducer = (state = Map([]), action) => {
+export const initialState = [];
+
+const courseReducer = (state = Map([]), action) => {
   
   switch (action.type) {
     default:
@@ -21,3 +23,5 @@ export const courseReducer = (state = Map([]), action) => {
       return state.setIn([String(action.index), "isSelected"], false);
   }
 };
+
+export default courseReducer;

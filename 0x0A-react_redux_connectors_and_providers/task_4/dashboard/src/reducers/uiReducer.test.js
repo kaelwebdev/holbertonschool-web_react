@@ -1,4 +1,4 @@
-import { uiReducer } from './uiReducer';
+import uiReducer from './uiReducer';
 
 describe('Test reducer.js', () => {
   const initialState = {
