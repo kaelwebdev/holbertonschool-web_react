@@ -8,8 +8,9 @@ import { Map, fromJS } from 'immutable';
 
 describe('Test notificationReducer.js', () => {
   const initialState = {
-    notifications: [],
+    notifications: {},
     filter: "DEFAULT",
+    loading: false,
   };
 
   const state = fromJS({
