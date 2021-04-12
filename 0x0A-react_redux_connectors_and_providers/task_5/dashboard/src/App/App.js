@@ -6,7 +6,6 @@ import Header from "../Header/Header";
 import Footer from "../Footer/Footer";
 import Login from "../Login/Login";
 import CourseList from '../CourseList/CourseList'
-import { getLatestNotification } from '../utils/utils';
 import BodySection from '../BodySection/BodySection';
 import BodySectionWithMarginBottom from '../BodySection/BodySectionWithMarginBottom';
 import {StyleSheet, css} from 'aphrodite';
@@ -20,21 +19,11 @@ const listCourses = [
   {id: 3, name: 'React', credit: 40}
 ];
 
-const listNotifications = [
-  {id: 1, html: undefined, type: "default", value: "New course available"},
-  {id: 2, html: undefined, type: "urgent", value: "New resume available"},
-  {id: 3, html: { __html: getLatestNotification()} , type: "urgent", value: undefined},
-];
-
 class App extends Component {
 
   constructor(props) {
     super(props)
     this.handleLogout = this.handleLogout.bind(this);
-    this.markNotificationAsRead = this.markNotificationAsRead.bind(this);
-    this.state = {
-      listNotifications
-    }
   }
 
   componentDidMount() {
@@ -51,16 +40,6 @@ class App extends Component {
         alert("Logging you out");
         this.props.logout();
     }
-  }
-
-  markNotificationAsRead(id) {
-    this.setState(
-      state => (
-        {
-          listNotifications: state.listNotifications.filter(x => x.id !== id)
-        }
-      )
-    );
   }
 
   render() {
@@ -81,11 +60,9 @@ class App extends Component {
     return (
       <>
         <Notifications
-          listNotifications={ this.state.listNotifications }
           displayDrawer={ this.props.displayDrawer }
           handleDisplayDrawer={ this.props.displayNotificationDrawer }
           handleHideDrawer={ this.props.hideNotificationDrawer }
-          markNotificationAsRead={this.markNotificationAsRead}
         />
         <div className={css(styles.app)}>
           <div className={css(styles.header)}>
