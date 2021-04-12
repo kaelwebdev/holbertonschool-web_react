@@ -1,41 +1,50 @@
 import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import imgClose from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
-import NotificationItemShape from './NotificationItemShape';
+//import NotificationItemShape from './NotificationItemShape';
 import {StyleSheet, css} from 'aphrodite';
+import { fetchNotifications } from "../actions/notificationActionCreators";
+let _ = require('lodash');
 
-
-export default class Notifications extends PureComponent {
+export class Notifications extends PureComponent {
   static propTypes = {
     displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.arrayOf(NotificationItemShape),
+    listNotifications: PropTypes.object,
     handleDisplayDrawer: PropTypes.func,
     handleHideDrawer: PropTypes.func,
     markNotificationAsRead: PropTypes.func,
+    fetchNotifications: PropTypes.func,
   }
 
   static defaultProps  = {
     displayDrawer: false,
-    listNotifications: [],
+    listNotifications: {},
     handleDisplayDrawer: () => void(0),
     handleHideDrawer: () => void(0),
     markNotificationAsRead: () => void(0),
+    fetchNotifications: () => {},
   }
 
   constructor (props) {
     super(props);
   }
 
+  componentDidMount() {
+    this.props.fetchNotifications();
+  } 
+
   renderNotification = x =>
-    <NotificationItem key={ x.id } keyId={ x.id } type={ x.type }
+    <NotificationItem key={ x.guid } keyId={ x.guid } type={ x.type }
     value={ x.value } html={ x.html } markAsRead={ this.props.markNotificationAsRead }/>
 
   generateList = () => {
-    if (this.props.listNotifications.length <= 0) {
-      return (<li>No new notification for now</li>);
+    if (_.isEmpty(this.props.listNotifications)) {
+        return (<li>No new notification for now</li>);
     }
-    return this.props.listNotifications.map(this.renderNotification)
+    return Object.values(this.props.listNotifications)
+      .map(this.renderNotification);
   }
   
   render() {
@@ -66,7 +75,7 @@ export default class Notifications extends PureComponent {
             }
       />
       </button>
-      { this.props.listNotifications?.length > 0  ? <p>Here is the list of notifications</p> : null}
+      <p>Here is the list of notifications</p>
       <ul>
         { this.generateList() }
       </ul>
@@ -143,3 +152,14 @@ const styles = StyleSheet.create({
       paddingBottom: '10px'
   }
 });
+export const mapStateToProps = (state) => {
+  return {
+    listNotifications: state.notifications.get("messages"),
+  };
+};
+
+export const mapDispatchToProps = {
+  fetchNotifications,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

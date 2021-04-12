@@ -26,6 +26,23 @@ function getAllNotificationsByUser(userId) {
 }
 
 export const notificationsNormalizer = (data) => {
+  /**
+   * returns normalized information. Structure example:
+   * {
+   *  messages: {
+   *    123: { guid: "123", type: "A", value: "abc"},
+   *  },
+   *  notifications: {
+   *    456: {id: "456", author: "789", context: 123},
+   *  },
+   *  users: {
+   *    789: {
+   *      id: "789", name: { first: "Pepito", last: "Perez" }, age: 25,
+   *      email: "pepito@h.com", picture: "http://placehold.it/32x32"
+   *    },
+   *  },
+   * }
+   */
   return normalize(data, [notification]).entities;
 };
 
