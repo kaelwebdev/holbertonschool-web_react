@@ -12,7 +12,6 @@ export const initialState = {
 }
 
 const notificationReducer = (state = Map(initialState), action) => {
-  console.log("notificationReducer:", action.type);
   switch(action.type) {
     default:
       return state;

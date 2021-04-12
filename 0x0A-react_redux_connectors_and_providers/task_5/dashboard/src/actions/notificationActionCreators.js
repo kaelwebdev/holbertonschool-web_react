@@ -13,15 +13,12 @@ export const boundFetchNotificationsSuccess = () => dispatch(setNotificationFilt
 export const setLoadingState = (loading) => ({ type: SET_LOADING_STATE, loading });
 export const setNotifications = (data) => ({ type: FETCH_NOTIFICATIONS_SUCCESS, data });
 export const fetchNotifications = () => {
-  console.log("fetchNotifications");
   return (dispatch) => {
-    console.log("setLoadingState");
     dispatch(setLoadingState(true));
     return fetch("./notifications.json")
       .then((res) => res.json())
       .then((data) => 
         {
-          console.log("setNotifications");
           dispatch(setNotifications(data))
           return data
         })
