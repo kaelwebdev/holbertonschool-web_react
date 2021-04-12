@@ -6,6 +6,8 @@ import NotificationItem from './NotificationItem';
 //import NotificationItemShape from './NotificationItemShape';
 import {StyleSheet, css} from 'aphrodite';
 import { fetchNotifications } from "../actions/notificationActionCreators";
+import { getUnreadNotifications } from "../selectors/notificationSelector";
+
 let _ = require('lodash');
 
 export class Notifications extends PureComponent {
@@ -43,7 +45,7 @@ export class Notifications extends PureComponent {
     if (_.isEmpty(this.props.listNotifications)) {
         return (<li>No new notification for now</li>);
     }
-    return Object.values(this.props.listNotifications)
+    return this.props.listNotifications.valueSeq()
       .map(this.renderNotification);
   }
   
@@ -154,7 +156,7 @@ const styles = StyleSheet.create({
 });
 export const mapStateToProps = (state) => {
   return {
-    listNotifications: state.notifications.get("messages"),
+    listNotifications: getUnreadNotifications(state.notifications),
   };
 };
 
