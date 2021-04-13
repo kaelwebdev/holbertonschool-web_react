@@ -5,8 +5,8 @@ import imgClose from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
 //import NotificationItemShape from './NotificationItemShape';
 import {StyleSheet, css} from 'aphrodite';
-import { fetchNotifications } from "../actions/notificationActionCreators";
-import { getUnreadNotifications } from "../selectors/notificationSelector";
+import { fetchNotifications, setNotificationFilter } from "../actions/notificationActionCreators";
+import { getUnreadNotificationsByType } from "../selectors/notificationSelector";
 
 let _ = require('lodash');
 
@@ -78,6 +78,18 @@ export class Notifications extends PureComponent {
       />
       </button>
       <p>Here is the list of notifications</p>
+      <button 
+        type="button"
+        id="buttonFilterUrgent"
+        onClick={() => { this.props.setNotificationFilter("URGENT"); }} >
+          ❗❗
+      </button>
+      <button
+        type="button"
+        id="buttonFilterDefault" 
+        onClick={() => { this.props.setNotificationFilter("DEFAULT"); }} >
+         💠
+      </button>
       <ul>
         { this.generateList() }
       </ul>
@@ -156,12 +168,13 @@ const styles = StyleSheet.create({
 });
 export const mapStateToProps = (state) => {
   return {
-    listNotifications: getUnreadNotifications(state.notifications),
+    listNotifications: getUnreadNotificationsByType(state),
   };
 };
 
 export const mapDispatchToProps = {
   fetchNotifications,
+  setNotificationFilter
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Notifications);

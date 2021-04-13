@@ -1,4 +1,4 @@
-  
+import { createSelector } from "reselect";
 import { Map } from 'immutable';
 
 export const filterTypeSelected = (state) => {
@@ -16,12 +16,28 @@ export const getMessages = (state) => {
   return state.get('messages');
 };
 
-export const getUnreadNotifications = (state) => {
-  const messages = getMessages(state);
-  if (messages) {
-    return  Map(messages)
-              .valueSeq()
-              .filter((notification) => notification["isRead"] === false);
+const getNotificationsField = (state) => state.notifications;
+
+export const getUnreadNotificationsByType = createSelector(
+  getNotificationsField,
+  (notifications)  => {
+    const messages = getMessages(notifications);
+    const filter = filterTypeSelected(notifications);
+
+    if (messages) {
+      if (filter === "URGENT") {
+        return Map(messages)
+                .valueSeq()
+                .filter((notification) => (
+                  notification["isRead"] === false &&
+                  notification["type"] === "urgent"
+                ));
+      } else {
+        return Map(messages)
+                .valueSeq()
+                .filter((notification) => notification["isRead"] === false);
+      }
+    }
+    return messages;
   }
-  return messages;
-};
+);
