@@ -6,3 +6,12 @@ export const unSelectCourse = (index) => ({ type: UNSELECT_COURSE, index });
 export const boundUnSelectCourse = (index) => dispatch(unSelectCourse(index));
 export const fetchCourseSuccess = (data) => ({ type: FETCH_COURSE_SUCCESS, data});
 export const boundFetchCourseSuccess = () => dispatch(fetchCourseSuccess());
+export const setCourses = (data) => ({ type: FETCH_COURSE_SUCCESS, data });
+export const fetchCourses = () => {
+  return (dispatch) => {
+    return fetch("./courses.json")
+      .then((res) => res.json())
+      .then((data) => dispatch(setCourses(data)))
+      .catch((error) => {})
+  };
+};

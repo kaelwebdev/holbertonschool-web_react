@@ -52,7 +52,7 @@ class App extends Component {
     if (this.props.isLoggedIn) {
       mainArea = (
         <BodySectionWithMarginBottom title='Course list' >
-          <CourseList listCourses={listCourses} />
+          <CourseList />
         </BodySectionWithMarginBottom>
        );
     }

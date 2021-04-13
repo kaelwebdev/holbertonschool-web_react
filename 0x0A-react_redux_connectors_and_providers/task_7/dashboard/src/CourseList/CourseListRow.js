@@ -4,10 +4,13 @@ import {StyleSheet, css} from 'aphrodite';
 
 
 function CourseListRow (props) {
-  const [checked, setChecked] = React.useState(false);
 
-  const rowStyle = checked ? css(styles.rowChecked) : css(styles.rowStyle);
+  const rowStyle = props.isChecked ? css(styles.rowChecked) : css(styles.rowStyle);
   const headerRowStyle = css(styles.tr, styles.headerRowStyle );
+
+  const handleCheck = () => {
+    props.onChangeRow(props.id, !props.isChecked);
+  };
 
   if (props.isHeader) {
     if (props.textSecondCell === null) {
@@ -33,7 +36,7 @@ function CourseListRow (props) {
   return (
     <tr className={ rowStyle } >
       <td className={ css(styles.td) }>
-      <input type="checkbox" onChange={() => setChecked(!checked)}/>
+      <input type="checkbox" onChange={handleCheck}/>
         { props.textFirstCell }
       </td>
       <td className={ css(styles.td) }>
