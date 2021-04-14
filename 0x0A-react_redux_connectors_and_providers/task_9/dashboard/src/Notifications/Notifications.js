@@ -1,101 +1,88 @@
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import PropTypes from 'prop-types';
 import imgClose from '../assets/close-icon.png';
 import NotificationItem from './NotificationItem';
-//import NotificationItemShape from './NotificationItemShape';
 import {StyleSheet, css} from 'aphrodite';
-import { fetchNotifications, setNotificationFilter } from "../actions/notificationActionCreators";
-import { getUnreadNotificationsByType } from "../selectors/notificationSelector";
 
 let _ = require('lodash');
 
-export class Notifications extends PureComponent {
-  static propTypes = {
-    displayDrawer: PropTypes.bool,
-    listNotifications: PropTypes.object,
-    handleDisplayDrawer: PropTypes.func,
-    handleHideDrawer: PropTypes.func,
-    markNotificationAsRead: PropTypes.func,
-    fetchNotifications: PropTypes.func,
-  }
+function Notifications (props) {
 
-  static defaultProps  = {
-    displayDrawer: false,
-    listNotifications: {},
-    handleDisplayDrawer: () => void(0),
-    handleHideDrawer: () => void(0),
-    markNotificationAsRead: () => void(0),
-    fetchNotifications: () => {},
-  }
-
-  constructor (props) {
-    super(props);
-  }
-
-  componentDidMount() {
-    this.props.fetchNotifications();
-  } 
-
-  renderNotification = x =>
+  const renderNotification = x =>
     <NotificationItem key={ x.guid } keyId={ x.guid } type={ x.type }
-    value={ x.value } html={ x.html } markAsRead={ this.props.markNotificationAsRead }/>
+    value={ x.value } html={ x.html } markAsRead={ props.markNotificationAsRead }/>
 
-  generateList = () => {
-    if (_.isEmpty(this.props.listNotifications)) {
+  const generateList = () => {
+    if (_.isEmpty(props.listNotifications)) {
         return (<li>No new notification for now</li>);
     }
-    return this.props.listNotifications.valueSeq()
-      .map(this.renderNotification);
+    return props.listNotifications.valueSeq()
+      .map(renderNotification);
   }
   
-  render() {
-    return <>
-    <div className={ css(styles.menuItem) }
-      onClick={this.props.handleDisplayDrawer} data-test-id="notificationBtn">
-        <p
-          className={ css(styles.p, styles.bounce, styles.textFlash) }>
-          Your notifications
-        </p>
-    </div>
-    { this.props.displayDrawer ? <div className={ css(styles.notifications) }>
-      <button aria-label="Close"
-              onClick={ this.props.handleHideDrawer }
-              style={
-                {position: "absolute",
-                top: 10,
-                right: 10,
-                visibility: "hidden"}
-              }
-              data-test-id="closeNotificationBtn"
-      >
-      <img alt="close" src={imgClose}
+  return <>
+  <div className={ css(styles.menuItem) }
+    onClick={props.handleDisplayDrawer} data-test-id="notificationBtn">
+      <p
+        className={ css(styles.p, styles.bounce, styles.textFlash) }>
+        Your notifications
+      </p>
+  </div>
+  { props.displayDrawer ? <div className={ css(styles.notifications) }>
+    <button aria-label="Close"
+            onClick={ props.handleHideDrawer }
             style={
-              {visibility: "visible",
-              height: "15px",
-              width: "15px"}
+              {position: "absolute",
+              top: 10,
+              right: 10,
+              visibility: "hidden"}
             }
-      />
-      </button>
-      <p>Here is the list of notifications</p>
-      <button 
-        type="button"
-        id="buttonFilterUrgent"
-        onClick={() => { this.props.setNotificationFilter("URGENT"); }} >
-          ❗❗
-      </button>
-      <button
-        type="button"
-        id="buttonFilterDefault" 
-        onClick={() => { this.props.setNotificationFilter("DEFAULT"); }} >
-         💠
-      </button>
-      <ul>
-        { this.generateList() }
-      </ul>
-    </div> : null }
-    </>
-  }
+            data-test-id="closeNotificationBtn"
+    >
+    <img alt="close" src={imgClose}
+          style={
+            {visibility: "visible",
+            height: "15px",
+            width: "15px"}
+          }
+    />
+    </button>
+    <p>Here is the list of notifications</p>
+    <button 
+      type="button"
+      id="buttonFilterUrgent"
+      onClick={() => { props.setNotificationFilter("URGENT"); }} >
+        ❗❗
+    </button>
+    <button
+      type="button"
+      id="buttonFilterDefault" 
+      onClick={() => { props.setNotificationFilter("DEFAULT"); }} >
+        💠
+    </button>
+    <ul>
+      { generateList() }
+    </ul>
+  </div> : null }
+  </>
+}
+
+Notifications.propTypes = {
+  displayDrawer: PropTypes.bool,
+  listNotifications: PropTypes.object,
+  handleDisplayDrawer: PropTypes.func,
+  handleHideDrawer: PropTypes.func,
+  markNotificationAsRead: PropTypes.func,
+  fetchNotifications: PropTypes.func,
+}
+
+Notifications.defaultProps  = {
+  displayDrawer: false,
+  listNotifications: {},
+  handleDisplayDrawer: () => void(0),
+  handleHideDrawer: () => void(0),
+  markNotificationAsRead: () => void(0),
+  fetchNotifications: () => {},
 }
 
 const styles = StyleSheet.create({
@@ -166,15 +153,5 @@ const styles = StyleSheet.create({
       paddingBottom: '10px'
   }
 });
-export const mapStateToProps = (state) => {
-  return {
-    listNotifications: getUnreadNotificationsByType(state),
-  };
-};
 
-export const mapDispatchToProps = {
-  fetchNotifications,
-  setNotificationFilter
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Notifications);
+export default Notifications;
